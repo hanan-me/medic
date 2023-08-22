@@ -4,6 +4,7 @@ import 'package:medic/Signup_Page.dart';
 import 'package:get/get.dart';
 
 import 'auth_controller.dart';
+import 'forget_password.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -137,17 +138,88 @@ class _LoginPageState extends State<LoginPage> {
                     )
                 ),
                 SizedBox(height: 5,),
-                Row(
-                  children: [
-                    Expanded(child: Container(),),
-                    Text(
-                      "Forgot your Password?",
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                    onPressed: (){
+                      showModalBottomSheet(
+                          context: context, 
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                          builder: (context)=>Container(
+                        padding: EdgeInsets.all(30),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                                "Make Selection",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
+                            ),
+                            Text(
+                                "Select one of the option given below to reset your password."
+                            ),
+                            SizedBox(height: h*0.05,),
+                            GestureDetector(
+                              onTap: (){Navigator.pop(context);Get.to(()=> ForgetPassword());},
+                              child: Container(
+                                padding: EdgeInsets.all(20),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.grey.shade200,
+                                ),
+                                child: Row(
+                                  children: [
+                                    Icon(Icons.email_outlined, color: Colors.teal,size: 50,),
+                                    SizedBox(width: h*0.01,),
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text("Email"),
+                                        Text("Reset via Email Verfication."),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: h*0.01,),
+                            GestureDetector(
+                              onTap: (){},
+                              child: Container(
+                                padding: EdgeInsets.all(20),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.grey.shade200,
+                                ),
+                                child: Row(
+                                  children: [
+                                    Icon(Icons.mobile_friendly, color: Colors.teal,size: 50,),
+                                    SizedBox(width: h*0.01,),
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text("Phone Number"),
+                                        Text("Reset via OTP Verfication."),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ));
+                    },
+                    child: Text(
+                      "Forget Password!",
                       style: TextStyle(
-                        fontSize: 18,
                         color: Colors.teal,
+                        fontSize: 18,
                       ),
                     ),
-                  ]
+                  ),
                 )
               ],
             ),

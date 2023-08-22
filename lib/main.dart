@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       // home: new LoginScreen(),
-      home: SplashScreen(),
+      home: CircularProgressIndicator(),
     );//MaterialApp
   }
 }
