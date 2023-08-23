@@ -49,7 +49,7 @@ class _Get_OtpState extends State<Get_Otp> {
                   ),
                   SizedBox(height: h * 0.01,),
                   Text(
-                    "Enter your email below to get code",
+                    "OTP Verification",
                     style: TextStyle(
                       fontSize: 18,
                       color: Colors.black87,
@@ -59,7 +59,7 @@ class _Get_OtpState extends State<Get_Otp> {
                 ],
               ),
             ),
-            SizedBox(height: h * 0.1,),
+            SizedBox(height: h * 0.08,),
             OtpTextField(
               numberOfFields: 6,
               fillColor: Colors.teal.withOpacity(0.1),

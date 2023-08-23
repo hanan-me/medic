@@ -10,6 +10,7 @@ import 'package:medic/doc_dash.dart';
 import 'package:medic/doctor_page.dart';
 import 'package:medic/doctor_profile.dart';
 import 'package:medic/getStarted.dart';
+import 'package:medic/lab_scientist.dart';
 
 class AuthController extends GetxController{
   //AuthController.instance..
@@ -28,7 +29,7 @@ class AuthController extends GetxController{
   _initialScreens(User? user){
     if(user == null){
       print("Signup page");
-      Get.offAll(()=>SplashScreen());
+      Get.offAll(()=>Lab_Scientist());
     }else{
       Get.offAll(()=>DoctorDashboard());
     }
@@ -49,7 +50,7 @@ class AuthController extends GetxController{
           ),
         ),
         messageText: Text(
-          e.toString(),
+          "Invalid Email or Password!",
         )
       );
     }

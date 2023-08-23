@@ -21,6 +21,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
       body: Form(
         child: Column(
           children: [
+            SizedBox(height: h * 0.1,),
             Container(
               margin: const EdgeInsets.only(top: 0),
               width: w * 0.3,
