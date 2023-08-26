@@ -9,8 +9,11 @@ import 'package:medic/SplashScreen.dart';
 import 'package:medic/doc_dash.dart';
 import 'package:medic/doctor_page.dart';
 import 'package:medic/doctor_profile.dart';
+import 'package:medic/generate_prescription.dart';
 import 'package:medic/getStarted.dart';
+import 'package:medic/get_otp.dart';
 import 'package:medic/lab_scientist.dart';
+import 'package:medic/patient_dash.dart';
 
 class AuthController extends GetxController{
   //AuthController.instance..
@@ -29,9 +32,9 @@ class AuthController extends GetxController{
   _initialScreens(User? user){
     if(user == null){
       print("Signup page");
-      Get.offAll(()=>Lab_Scientist());
+      Get.offAll(()=>Doctor_Page());
     }else{
-      Get.offAll(()=>DoctorDashboard());
+      Get.offAll(()=>LoginPage());
     }
   }
 
@@ -55,9 +58,28 @@ class AuthController extends GetxController{
       );
     }
   }
-  void logIn(String email, String password) async{
+  void logIn(String email, String password, String value) async{
     try{
       await auth.signInWithEmailAndPassword(email: email, password: password);
+      // Get.offAll(()=>DoctorDashboard());
+      if(value == "1"){
+        Get.offAll(()=>DoctorDashboard());
+      }
+      if(value == "2"){
+        Get.offAll(()=>Patient_Dashboard());
+      }
+      else{
+        Get.offAll(()=>LoginPage());
+      }
+      // if(value == "1"){
+      //   Get.offAll(()=>DoctorDashboard());
+      // }
+      // if(value == "1"){
+      //   Get.offAll(()=>DoctorDashboard());
+      // }
+      // else {
+      //     Get.offAll(()=>DoctorDashboard());
+      //   }
     }
     catch(e){
       Get.snackbar("About Login", "message",
@@ -70,7 +92,7 @@ class AuthController extends GetxController{
           ),
         ),
         messageText: Text(
-          e.toString(),
+          "Empty Fields",
         )
       );
     }

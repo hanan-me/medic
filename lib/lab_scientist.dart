@@ -27,7 +27,7 @@ class _Lab_ScientistState extends State<Lab_Scientist> {
           isLoading = true;
         });
         result = await FilePicker.platform.pickFiles(
-          type: FileType.image,
+          type: FileType.any,
           allowMultiple: false,
         );
         if(result != null){
@@ -52,7 +52,8 @@ class _Lab_ScientistState extends State<Lab_Scientist> {
         backgroundColor: Colors.teal,
         leading: IconButton(onPressed:()=> Get.back(),icon: const Icon(Icons.arrow_back, color: Colors.white)),
         title: Text("Profile"),
-        actions: [IconButton(onPressed:()=> Get.to(()=> LoginPage()),icon: const Icon(Icons.logout_outlined, color: Colors.white))],
+        actions: [IconButton(onPressed:()=> Get.to(()=> LoginPage()),
+            icon: const Icon(Icons.logout_outlined, color: Colors.white))],
       ),
       resizeToAvoidBottomInset: false,
       // backgroundColor: Colors.white,
@@ -97,10 +98,80 @@ class _Lab_ScientistState extends State<Lab_Scientist> {
             color: Colors.black54,
           ),
           Container(
+              margin: EdgeInsets.only(left: 20, right:20, top: 10),
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(30),
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 10,
+                      spreadRadius: 7,
+                      offset: Offset(1, 1),
+                      color:Colors.grey.withOpacity(0.4),
+                    )
+                  ]
+              ),
+              child: TextField(
+                decoration: InputDecoration(
+                  hintText: "Patient Id",
+                  prefixIcon: Icon(Icons.numbers, color:Colors.teal),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                      borderSide: BorderSide(
+                        color: Colors.white,
+                        width: 1.0,
+                      )
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                      borderSide: BorderSide(
+                          color: Colors.white,
+                          width: 1.0
+                      )
+                  ),
+                ),
+              )
+          ),
+          Container(
+              margin: EdgeInsets.only(left: 20, right:20, top: 10),
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(30),
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 10,
+                      spreadRadius: 7,
+                      offset: Offset(1, 1),
+                      color:Colors.grey.withOpacity(0.4),
+                    )
+                  ]
+              ),
+              child: TextField(
+                decoration: InputDecoration(
+                  hintText: "Report Name",
+                  prefixIcon: Icon(Icons.text_fields, color:Colors.teal),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                      borderSide: BorderSide(
+                        color: Colors.white,
+                        width: 1.0,
+                      )
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                      borderSide: BorderSide(
+                          color: Colors.white,
+                          width: 1.0
+                      )
+                  ),
+                ),
+              )
+          ),
+          Container(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: h*0.1,),
+                SizedBox(height: h*0.05,),
 
                 Center(
                   child: Container(

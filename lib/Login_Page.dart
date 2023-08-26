@@ -4,6 +4,7 @@ import 'package:medic/Signup_Page.dart';
 import 'package:get/get.dart';
 
 import 'auth_controller.dart';
+import 'doc_dash.dart';
 import 'forget_password.dart';
 
 class LoginPage extends StatefulWidget {
@@ -16,6 +17,13 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  List dropDownListData = [
+    {"title": "Doctor", "value": "1"},
+    {"title": "Patient", "value": "2"},
+    {"title": "Lab Scientist", "value": "3"},
+    {"title": "Data Entry Operator", "value": "4"},
+  ];
+  String defaultValue = "";
   @override
   void dispose() {
     emailController.dispose();
@@ -45,7 +53,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
           Container(
-            margin: const EdgeInsets.only(left: 20, right:20, top: 10),
+            margin: EdgeInsets.only(left: 20, right:20, top: 10),
             child: Column(
               // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -64,7 +72,87 @@ class _LoginPageState extends State<LoginPage> {
                       color: Colors.grey[500],
                   ),
                 ),
-                SizedBox(height: 50,),
+                SizedBox(height: w*0.07,),
+                Container(
+                  height: h*0.07,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(30),
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 10,
+                          spreadRadius: 7,
+                          offset: Offset(1, 1),
+                          color: Colors.grey.withOpacity(0.4),
+                        )
+                      ]
+                  ),
+                  // child: DropdownButtonFormField(
+                  //   decoration: InputDecoration(
+                  //     // hintText: "-Login as-",
+                  //     prefixIcon: Icon(Icons.person, color: Colors.teal),
+                  //     focusedBorder: OutlineInputBorder(
+                  //         borderRadius: BorderRadius.circular(30),
+                  //         borderSide: BorderSide(
+                  //           color: Colors.white,
+                  //           width: 1.0,
+                  //         )
+                  //     ),
+                  //     enabledBorder: OutlineInputBorder(
+                  //         borderRadius: BorderRadius.circular(30),
+                  //         borderSide: BorderSide(
+                  //             color: Colors.white,
+                  //             width: 1.0
+                  //         )
+                  //     ),
+                  //   ),
+                  //   value: _value,
+                  //   items: [
+                  //     DropdownMenuItem(child: Text("-Sigin as-"),
+                  //       value: "-1",),
+                  //     DropdownMenuItem(child: Text("Doctor"), value: "1",),
+                  //     DropdownMenuItem(child: Text("Patient"), value: "2",),
+                  //     DropdownMenuItem(child: Text("Lab Operator"),
+                  //       value: "3",),
+                  //     DropdownMenuItem(child: Text("Data Entry Operator"),
+                  //       value: "4",),
+                  //   ],
+                  //
+                  //   onChanged: (v) {
+                  //     setState(() {
+                  //       _value = v!;
+                  //     });
+                  //   },
+                  // ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButton<String>(
+                          isDense: true,
+                          value: defaultValue,
+                          isExpanded: true,
+                          menuMaxHeight: 350,
+                          items: [
+                            const DropdownMenuItem(
+                                child: Text(
+                                  "Sign as",
+                                ),
+                                value: ""),
+                            ...dropDownListData.map<DropdownMenuItem<String>>((data) {
+                              return DropdownMenuItem(
+                                  child: Text(data['title']), value: data['value']);
+                            }).toList(),
+                          ],
+                          onChanged: (value) {
+                            // print("selected Value $value");
+                            setState(() {
+                              defaultValue = value!;
+                            });
+                          }),
+                    ),
+                  ),
+                ),
+                SizedBox(height: w*0.04,),
                 Container(
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -100,7 +188,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 )
                 ),
-                SizedBox(height: 20,),
+                SizedBox(height: w*0.04,),
                 Container(
                     decoration: BoxDecoration(
                         color: Colors.white,
@@ -137,7 +225,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     )
                 ),
-                SizedBox(height: 5,),
+                SizedBox(height: w*0.04,),
                 Align(
                   alignment: Alignment.centerRight,
                   child: TextButton(
@@ -224,11 +312,11 @@ class _LoginPageState extends State<LoginPage> {
               ],
             ),
           ),
-          SizedBox(height: w*0.1,),
+          SizedBox(height: w*0.07,),
           GestureDetector(
             onTap: (){
               AuthController.instance.logIn(emailController.text.trim(),
-                  passwordController.text.trim());
+                  passwordController.text.trim(),defaultValue);
             },
             child: Container(
               width: w*0.35,

@@ -24,19 +24,19 @@ class _ForgetPasswordState extends State<ForgetPassword> {
             SizedBox(height: h * 0.1,),
             Container(
               margin: const EdgeInsets.only(top: 0),
-              width: w * 0.3,
-              height: h * 0.2,
+              width: w * 0.8,
+              height: h * 0.4,
               decoration: BoxDecoration(
                   image: DecorationImage(
                       image: AssetImage(
-                          "img/logo up.png"
+                          "img/simplistic-email-messaging-on-computer-screen.png"
                       ),
                       fit: BoxFit.cover
                   )
               ),
             ),
             Container(
-              margin: const EdgeInsets.only(left: 20, right: 20),
+              margin: const EdgeInsets.only(left: 20, right: 20,top: 10),
               child: Column(
                 // crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

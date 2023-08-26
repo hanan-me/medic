@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+
+import 'Login_Page.dart';
 class Doctor_Page extends StatefulWidget {
   const Doctor_Page({super.key});
 
@@ -12,6 +16,12 @@ class _Doctor_PageState extends State<Doctor_Page> {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.teal,
+        leading: IconButton(onPressed:()=> Get.back(),icon: const Icon(Icons.arrow_back, color: Colors.white)),
+        title: Text("Profile"),
+        actions: [IconButton(onPressed:()=> Get.to(()=> LoginPage()),icon: const Icon(Icons.logout_outlined, color: Colors.white))],
+      ),
       resizeToAvoidBottomInset: false,
       // backgroundColor: Colors.white,
       body: Column(
@@ -38,7 +48,7 @@ class _Doctor_PageState extends State<Doctor_Page> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Docor Name",
+                  "Doctor Name",
                   style: TextStyle(
                     fontSize: 28,
                     color: Colors.teal,

@@ -80,12 +80,6 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
                               Colors.teal,
                             ],
                           )
-                          // image: DecorationImage(
-                          //   image: AssetImage(
-                          //       "img/btn.jpg"
-                          //   ),
-                          //   fit: BoxFit.cover,
-                          // )
                       ),
                       child: Center(
                         child: Text(
