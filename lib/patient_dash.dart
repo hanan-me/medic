@@ -46,7 +46,7 @@ class _Patient_DashboardState extends State<Patient_Dashboard> {
               ),
               SizedBox(height: h*0.012,),
               Text(
-                "Doctor Name..",
+                "Patient Name..",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.grey,
@@ -96,7 +96,7 @@ class _Patient_DashboardState extends State<Patient_Dashboard> {
                 // Get.to(Doctor_Page());
               }),
               ProfileManage(title:"Messages",icon: Icons.message,onPress:(){}),
-              ProfileManage(title:"Appointments",icon: Icons.calendar_month,onPress:(){}),
+              ProfileManage(title:"View Appointments",icon: Icons.calendar_month,onPress:(){}),
               Divider(
                 color: Colors.grey,
               ),

@@ -87,43 +87,6 @@ class _LoginPageState extends State<LoginPage> {
                         )
                       ]
                   ),
-                  // child: DropdownButtonFormField(
-                  //   decoration: InputDecoration(
-                  //     // hintText: "-Login as-",
-                  //     prefixIcon: Icon(Icons.person, color: Colors.teal),
-                  //     focusedBorder: OutlineInputBorder(
-                  //         borderRadius: BorderRadius.circular(30),
-                  //         borderSide: BorderSide(
-                  //           color: Colors.white,
-                  //           width: 1.0,
-                  //         )
-                  //     ),
-                  //     enabledBorder: OutlineInputBorder(
-                  //         borderRadius: BorderRadius.circular(30),
-                  //         borderSide: BorderSide(
-                  //             color: Colors.white,
-                  //             width: 1.0
-                  //         )
-                  //     ),
-                  //   ),
-                  //   value: _value,
-                  //   items: [
-                  //     DropdownMenuItem(child: Text("-Sigin as-"),
-                  //       value: "-1",),
-                  //     DropdownMenuItem(child: Text("Doctor"), value: "1",),
-                  //     DropdownMenuItem(child: Text("Patient"), value: "2",),
-                  //     DropdownMenuItem(child: Text("Lab Operator"),
-                  //       value: "3",),
-                  //     DropdownMenuItem(child: Text("Data Entry Operator"),
-                  //       value: "4",),
-                  //   ],
-                  //
-                  //   onChanged: (v) {
-                  //     setState(() {
-                  //       _value = v!;
-                  //     });
-                  //   },
-                  // ),
                   child: Padding(
                     padding: const EdgeInsets.all(20),
                     child: DropdownButtonHideUnderline(

@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:lottie/lottie.dart';
 import 'package:medic/Login_Page.dart';
+import 'package:medic/create_new_pass.dart';
 class Get_Otp extends StatefulWidget {
   const Get_Otp({super.key});
 
@@ -67,7 +68,7 @@ class _Get_OtpState extends State<Get_Otp> {
           SizedBox(height: h * 0.05,),
           GestureDetector(
             onTap: () {
-              Get.to(()=> LoginPage());
+              Get.to(()=> Create_Password());
             },
             child: Container(
                 width: w * 0.4,
