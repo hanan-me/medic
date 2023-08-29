@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:medic/doc_home.dart';
 import 'package:medic/doctor_page.dart';
 import 'package:medic/doctor_profile.dart';
 
@@ -95,7 +96,7 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
                 ),
                 SizedBox(height: h*0.05,),
                 ProfileManage(title:"My Profile",icon: Icons.person,onPress:(){
-                  Get.to(Doctor_Page());
+                  Get.to(Doctor_Home());
                 }),
                 ProfileManage(title:"Messages",icon: Icons.message,onPress:(){}),
                 ProfileManage(title:"Appointments",icon: Icons.calendar_month,onPress:(){}),

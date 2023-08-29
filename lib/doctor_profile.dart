@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:medic/doc_dash.dart';
+
+import 'Login_Page.dart';
 class Doctor_Profile extends StatefulWidget {
   const Doctor_Profile({super.key});
 
@@ -13,11 +18,17 @@ class _Doctor_ProfileState extends State<Doctor_Profile> {
     double h = MediaQuery.of(context).size.height;
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        backgroundColor: Colors.teal,
+        leading: IconButton(onPressed:()=> Get.back(),icon: const Icon(Icons.arrow_back, color: Colors.white)),
+        title: Text("Complete Profile"),
+      ),
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
+        reverse: true,
         child: Column(
           children: [
-            SizedBox(height: h*0.07,),
+            SizedBox(height: h*0.02,),
             Center(
               child: Container(
                 width: w*0.3,
@@ -215,6 +226,7 @@ class _Doctor_ProfileState extends State<Doctor_Profile> {
                   ),
                 )
             ),
+            Padding(padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom)),
           ],
         ),
       )
