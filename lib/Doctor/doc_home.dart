@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:medic/doc_dash.dart';
-import 'package:medic/generate_prescription.dart';
+import 'package:medic/Doctor/doc_dash.dart';
+import 'package:medic/Doctor/generate_prescription.dart';
+import 'package:medic/Doctor/generate_report.dart';
 
-import 'Login_Page.dart';
 class Doctor_Home extends StatefulWidget {
   const Doctor_Home({super.key});
 
@@ -51,53 +51,83 @@ class _Doctor_HomeState extends State<Doctor_Home> {
             padding: EdgeInsets.only(left: h*0.03,),
             child: Text("Specialization",style: TextStyle(fontSize: 20,color: Colors.black54),),
           ),
-          Expanded(
-            child: GridView.count(
-              padding: EdgeInsets.only(left: h*0.03,right: h*0.03,top: h*0.04),
-              crossAxisSpacing: 10,
-              mainAxisSpacing: h*0.03,
-              crossAxisCount: 3,
-              children: [
-                MenuBoxes(title: 'Relevant Investigation',icon: Icons.heart_broken, onPress: () {  },),
-                MenuBoxes(title: 'Date of Surgery',icon: Icons.heart_broken, onPress: () {  },),
-                MenuBoxes(title: 'Diagnosis',icon: Icons.heart_broken, onPress: () {  },),
-                MenuBoxes(title: 'Operative Procedure',icon: Icons.heart_broken, onPress: () {  },),
-                MenuBoxes(title: 'Instructions on Discharge',icon: Icons.heart_broken, onPress: () {  },),
-                MenuBoxes(title: 'Medications on Discharge',icon: Icons.heart_broken, onPress: () { Get.to(Generate_Prescription()); },),
-              ],
-            ),
+          SizedBox(height: h*0.02,),
+          Divider(
+            color: Colors.grey,
           ),
-          GestureDetector(
-            onTap: (){
-              Get.to(DoctorDashboard());
-            },
-            child: Container(
-                width: w,
-                height: h * 0.06,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(0),
-                    gradient: LinearGradient(
-                      begin: Alignment.topRight,
-                      end: Alignment.bottomLeft,
-                      colors: [
-                        Colors.teal,
-                        Colors.teal,
-                      ],
-                    )
-                ),
-                child: Center(
-                  child: Text(
-                    "Profile",
-                    style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
-                )
+          Padding(
+            padding: EdgeInsets.only(left: h*0.03,),
+            child:Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("About",style: TextStyle(fontSize: 28,color: Colors.black87,fontWeight: FontWeight.bold),),
+                SizedBox(height: w*0.01,),
+                Text("A physician, medical practitioner, medical doctor, "
+                    "or simply doctor, is a health professional who practices medicine, "
+                    "which is concerned with promoting, maintaining or restoring health "
+                    "through the study, diagnosis, ",
+                  style: TextStyle(fontSize: 20,color: Colors.black54),),
+              ],
+            )
+          ),
+          SizedBox(height: w*0.3,),
+          Center(
+            child: Row(
+              children:[
+                SizedBox(width: h*0.013,),
+                ButtonWidget(title: "Profile", onPress: () {  },),
+                SizedBox(width: h*0.005,),
+                ButtonWidget(title: "Diagnose", onPress: () { Get.to(GenerateReport()); },),
+                SizedBox(width: h*0.005,),
+                ButtonWidget(title: "Patient History", onPress: () {  },),
+              ]
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class ButtonWidget extends StatelessWidget {
+  const ButtonWidget({
+    super.key,
+    this.title, required this.onPress,
+  });
+
+  final title;
+  final VoidCallback onPress;
+
+  @override
+  Widget build(BuildContext context) {
+    double w = MediaQuery.of(context).size.width;
+    double h = MediaQuery.of(context).size.height;
+    return GestureDetector(
+      onTap: onPress,
+      child: Container(
+          width: w*0.31,
+          height: h * 0.06,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(0),
+              gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                colors: [
+                  Colors.teal,
+                  Colors.teal,
+                ],
+              )
+          ),
+          child: Center(
+            child: Text(
+              title,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+          )
       ),
     );
   }

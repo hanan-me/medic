@@ -1,8 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:medic/Login_Page.dart';
 import 'package:get/get.dart';
-import 'package:medic/auth_controller.dart';
+import 'package:medic/Auths/auth_controller.dart';
+
+import 'Login_Page.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({Key? key}) : super(key: key);

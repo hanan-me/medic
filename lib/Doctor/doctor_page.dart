@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
-import 'Login_Page.dart';
+import '../Accounts/Login_Page.dart';
+
 class Doctor_Page extends StatefulWidget {
   const Doctor_Page({super.key});
 

@@ -1,12 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:medic/Login_Page.dart';
 import 'package:get/get.dart';
-import 'package:medic/SplashScreen.dart';
-import 'package:medic/firebase_options.dart';
+import 'package:medic/Starter/SplashScreen.dart';
 
 
-import 'auth_controller.dart';
+import 'Auths/auth_controller.dart';
+import 'Starter/firebase_options.dart';
 
 Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();

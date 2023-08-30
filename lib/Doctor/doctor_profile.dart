@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:medic/doc_dash.dart';
 
-import 'Login_Page.dart';
 class Doctor_Profile extends StatefulWidget {
   const Doctor_Profile({super.key});
 
@@ -207,13 +205,6 @@ class _Doctor_ProfileState extends State<Doctor_Profile> {
                         Colors.teal,
                       ],
                     ),
-                    // image: DecorationImage(
-                    //   image: AssetImage(
-                    //       "img/btn.jpg"
-                    //   ),
-                    //   fit: BoxFit.cover,
-                    // ),
-
                 ),
                 child: Center(
                   child: Text(

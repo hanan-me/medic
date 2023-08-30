@@ -4,7 +4,8 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:medic/Login_Page.dart';
+
+import 'Accounts/Login_Page.dart';
 class Lab_Scientist extends StatefulWidget {
   const Lab_Scientist({super.key});
 

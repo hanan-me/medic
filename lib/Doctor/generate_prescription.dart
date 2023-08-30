@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:lottie/lottie.dart';
-import 'package:medic/doc_dash.dart';
+import 'package:medic/Doctor/doc_dash.dart';
 class Generate_Prescription extends StatefulWidget {
   const Generate_Prescription({super.key});
 
@@ -13,14 +13,11 @@ class Generate_Prescription extends StatefulWidget {
 class _Generate_PrescriptionState extends State<Generate_Prescription> {
   List<TextEditingController> listController = [TextEditingController()];
   @override
-  bool morning = false;
-  bool noon = false;
-  bool evening = false;
-  String ans = "";
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.teal,
         leading: IconButton(onPressed:()=> Get.back(),icon: const Icon(Icons.arrow_back, color: Colors.white)),
@@ -30,6 +27,7 @@ class _Generate_PrescriptionState extends State<Generate_Prescription> {
       ),
       body: SafeArea(
         child: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -43,24 +41,21 @@ class _Generate_PrescriptionState extends State<Generate_Prescription> {
                   fit: BoxFit.cover,
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 20),
-                child: Text(
-                  "Generate Prescription",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 30,
-                    color: Colors.teal,
-                  ),
+              Text(
+                "Generate Prescription",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 30,
+                  color: Colors.teal,
                 ),
               ),
               ListView.builder(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
+                padding: EdgeInsets.symmetric(vertical: h*0.0,horizontal: h*0.015),
                 shrinkWrap: true,
                 itemCount: listController.length,
                 itemBuilder: (context, index) {
                   return SingleChildScrollView(
-                    padding: const EdgeInsets.only(top: 15),
+                    padding: EdgeInsets.only(top: h*0.02),
                     child: Column(
                       children: [
                         Container(
@@ -70,7 +65,7 @@ class _Generate_PrescriptionState extends State<Generate_Prescription> {
                                 boxShadow: [
                                   BoxShadow(
                                     blurRadius: 10,
-                                    spreadRadius: 7,
+                                    spreadRadius: 4,
                                     offset: Offset(1, 1),
                                     color: Colors.grey.withOpacity(0.4),
                                   )
@@ -98,64 +93,6 @@ class _Generate_PrescriptionState extends State<Generate_Prescription> {
                               ),
                             )
                         ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Container(
-                                child: CheckboxListTile(
-                                  title: Text('Morning'),
-                                  checkColor: Colors.white,
-                                  activeColor: Colors.teal,
-                                  value: morning, onChanged: (val){
-                                    setState(() {
-                                      morning = val!;
-                                      if(morning == true){
-                                        ans = "Morning";
-                                      }
-                                    });
-                                },
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: Container(
-                                child: CheckboxListTile(
-                                  title: Text('Noon'),
-                                  checkColor: Colors.white,
-                                  activeColor: Colors.teal,
-                                  value: noon, onChanged: (val){
-                                  setState(() {
-                                    noon = val!;
-                                    if(noon == true){
-                                      ans = "Noon";
-                                    }
-                                  });
-                                },
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: Container(
-                                child: CheckboxListTile(
-                                  title: Text('Evening'),
-                                  checkColor: Colors.white,
-                                  activeColor: Colors.teal,
-                                  value: evening, onChanged: (val){
-                                  setState(() {
-                                    evening = val!;
-                                    if(evening == true){
-                                      ans = "Night";
-                                    }
-                                  });
-                                },
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
                         index != 0
                             ? GestureDetector(
                                 onTap: (){
@@ -171,7 +108,7 @@ class _Generate_PrescriptionState extends State<Generate_Prescription> {
                                 size: 35,
                               ),
                             )
-                            :const SizedBox()
+                            :const SizedBox(),
                       ],
                     ),
                   );
@@ -214,6 +151,22 @@ class _Generate_PrescriptionState extends State<Generate_Prescription> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class Margin extends StatelessWidget {
+  const Margin({
+    super.key, required this.v, required this.h,
+  });
+
+  final double v;
+  final double h;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: v,horizontal: h),
     );
   }
 }

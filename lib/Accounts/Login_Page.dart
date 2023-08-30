@@ -1,10 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:medic/Signup_Page.dart';
+import 'package:medic/Accounts/Signup_Page.dart';
 import 'package:get/get.dart';
-
-import 'auth_controller.dart';
-import 'doc_dash.dart';
+import '../Auths/auth_controller.dart';
 import 'forget_password.dart';
 
 class LoginPage extends StatefulWidget {

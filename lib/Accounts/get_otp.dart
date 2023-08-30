@@ -3,8 +3,8 @@ import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:lottie/lottie.dart';
-import 'package:medic/Login_Page.dart';
-import 'package:medic/create_new_pass.dart';
+
+import 'create_new_pass.dart';
 class Get_Otp extends StatefulWidget {
   const Get_Otp({super.key});
 
