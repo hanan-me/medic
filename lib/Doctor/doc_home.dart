@@ -26,64 +26,67 @@ class _Doctor_HomeState extends State<Doctor_Home> {
       ),
       resizeToAvoidBottomInset: false,
       // backgroundColor: Colors.white,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            width: w,
-            height: h*0.34,
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage(
-                        "img/240_F_136187711_qeBMOwkPdTg1dCN8e5TR1AmduXDz60Xn.jpg"
-                    ),
-                    fit: BoxFit.cover
-                )
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              width: w,
+              height: h*0.34,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage(
+                          "img/240_F_136187711_qeBMOwkPdTg1dCN8e5TR1AmduXDz60Xn.jpg"
+                      ),
+                      fit: BoxFit.cover
+                  )
+              ),
             ),
-          ),
-          SizedBox(height: h*0.028,),
-          Padding(
-            padding: EdgeInsets.only(left: h*0.03,),
-            child: Text("Doctor Name..",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold,color: Colors.teal),),
-          ),
-          SizedBox(height: h*0.01,),
-          Padding(
-            padding: EdgeInsets.only(left: h*0.03,),
-            child: Text("Specialization",style: TextStyle(fontSize: 20,color: Colors.black54),),
-          ),
-          SizedBox(height: h*0.02,),
-          Divider(
-            color: Colors.grey,
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: h*0.03,),
-            child:Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text("About",style: TextStyle(fontSize: 28,color: Colors.black87,fontWeight: FontWeight.bold),),
-                SizedBox(height: w*0.01,),
-                Text("A physician, medical practitioner, medical doctor, "
-                    "or simply doctor, is a health professional who practices medicine, "
-                    "which is concerned with promoting, maintaining or restoring health "
-                    "through the study, diagnosis, ",
-                  style: TextStyle(fontSize: 20,color: Colors.black54),),
-              ],
-            )
-          ),
-          SizedBox(height: w*0.3,),
-          Center(
-            child: Row(
-              children:[
-                SizedBox(width: h*0.013,),
-                ButtonWidget(title: "Profile", onPress: () {  },),
-                SizedBox(width: h*0.005,),
-                ButtonWidget(title: "Diagnose", onPress: () { Get.to(GenerateReport()); },),
-                SizedBox(width: h*0.005,),
-                ButtonWidget(title: "Patient History", onPress: () {  },),
-              ]
+            SizedBox(height: h*0.028,),
+            Padding(
+              padding: EdgeInsets.only(left: h*0.03,),
+              child: Text("Doctor Name..",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold,color: Colors.teal),),
             ),
-          ),
-        ],
+            SizedBox(height: h*0.01,),
+            Padding(
+              padding: EdgeInsets.only(left: h*0.03,),
+              child: Text("Specialization",style: TextStyle(fontSize: 20,color: Colors.black54),),
+            ),
+            SizedBox(height: h*0.02,),
+            Divider(
+              color: Colors.grey,
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: h*0.03,right: h*0.03),
+              child:Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("About",style: TextStyle(fontSize: 28,color: Colors.black87,fontWeight: FontWeight.bold),),
+                  SizedBox(height: w*0.01,),
+                  Text("A physician, medical practitioner, medical doctor, "
+                      "or simply doctor, is a health professional who practices medicine, "
+                      "which is concerned with promoting, maintaining or restoring health "
+                      "through the study, diagnosis, ",
+                    style: TextStyle(fontSize: 15,color: Colors.black54),),
+                ],
+              )
+            ),
+            SizedBox(height: w*0.2,),
+            Center(
+              child: Row(
+                children:[
+                  SizedBox(width: h*0.013,),
+                  ButtonWidget(title: "Profile", onPress: () {  },),
+                  SizedBox(width: h*0.005,),
+                  ButtonWidget(title: "Diagnose", onPress: () { Get.to(GenerateReport()); },),
+                  SizedBox(width: h*0.005,),
+                  ButtonWidget(title: "Patient History", onPress: () {  },),
+                ]
+              ),
+            ),
+            SizedBox(height: w*0.02,),
+          ],
+        ),
       ),
     );
   }
@@ -108,7 +111,7 @@ class ButtonWidget extends StatelessWidget {
           width: w*0.31,
           height: h * 0.06,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(0),
+              borderRadius: BorderRadius.circular(10),
               gradient: LinearGradient(
                 begin: Alignment.topRight,
                 end: Alignment.bottomLeft,
@@ -122,7 +125,7 @@ class ButtonWidget extends StatelessWidget {
             child: Text(
               title,
               style: TextStyle(
-                fontSize: 16,
+                fontSize: 14,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
@@ -172,12 +175,13 @@ class MenuBoxes extends StatelessWidget {
                   title,
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: Colors.white
+                color: Colors.white,
+                fontSize: 12
               ),
               ),
             ),
             // SizedBox(height: h*0.01,),
-            Icon(icon, color: Colors.white,size: 40,),
+            Icon(icon, color: Colors.white,size: 30,),
           ],
         )
       ),

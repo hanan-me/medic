@@ -15,13 +15,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  List dropDownListData = [
-    {"title": "Doctor", "value": "1"},
-    {"title": "Patient", "value": "2"},
-    {"title": "Lab Scientist", "value": "3"},
-    {"title": "Data Entry Operator", "value": "4"},
-  ];
-  String defaultValue = "";
+
   @override
   void dispose() {
     emailController.dispose();
@@ -75,51 +69,6 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     SizedBox(height: w*0.07,),
-                    Container(
-                      height: h*0.07,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(30),
-                          boxShadow: [
-                            BoxShadow(
-                              blurRadius: 10,
-                              spreadRadius: 7,
-                              offset: Offset(1, 1),
-                              color: Colors.grey.withOpacity(0.4),
-                            )
-                          ]
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.all(h*0.02),
-                        child: DropdownButtonHideUnderline(
-                          child: DropdownButton<String>(
-                              isDense: true,
-                              value: defaultValue,
-                              isExpanded: true,
-                              menuMaxHeight: 350,
-                              items: [
-                                const DropdownMenuItem(
-                                    child: Text(
-                                      "Sign as",
-                                      style: TextStyle(
-                                        color: Colors.black54,
-                                      ),
-                                    ),
-                                    value: ""),
-                                ...dropDownListData.map<DropdownMenuItem<String>>((data) {
-                                  return DropdownMenuItem(
-                                      child: Text(data['title']), value: data['value']);
-                                }).toList(),
-                              ],
-                              onChanged: (value) {
-                                // print("selected Value $value");
-                                setState(() {
-                                  defaultValue = value!;
-                                });
-                              }),
-                        ),
-                      ),
-                    ),
                     SizedBox(height: w*0.04,),
                     TextFieldWidget(hintText: "Your Email",icon: Icons.email,controler: emailController),
                     SizedBox(height: w*0.04,),
@@ -212,8 +161,7 @@ class _LoginPageState extends State<LoginPage> {
                     GestureDetector(
                       onTap: (){
                         AuthController.instance.logIn(emailController.text.trim(),
-                            passwordController.text.trim(),defaultValue);
-                        print(defaultValue);
+                            passwordController.text.trim());
                       },
                       child: Container(
                           width: w*0.35,

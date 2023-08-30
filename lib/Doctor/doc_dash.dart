@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:medic/Doctor/doc_home.dart';
+import 'package:medic/Doctor/doctor_profile.dart';
 
 
 import '../Auths/auth_controller.dart';
-import 'doctor_profile.dart';
+
 class DoctorDashboard extends StatefulWidget {
   const DoctorDashboard({super.key});
 
@@ -56,7 +57,7 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
                   ),
                 ),
                 SizedBox(height: h*0.035,),
-                RoundedBtnWidget( title: "Edit Profile",onPress: () { Get.to(DoctorDashboard()); },),
+                RoundedBtnWidget( title: "Edit Profile",onPress: () { Get.to(Doctor_Profile()); },),
                 SizedBox(height: h*0.05,),
                 ProfileManage(title:"My Profile",icon: Icons.person,onPress:(){
                   Get.to(Doctor_Home());

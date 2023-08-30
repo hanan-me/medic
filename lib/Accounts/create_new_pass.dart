@@ -140,10 +140,18 @@ class _Create_PasswordState extends State<Create_Password> {
                 Get.to(()=> LoginPage());
               },
               child: Container(
-                  width: w * 0.5,
-                  height: h * 0.055,
+                  width: w * 0.58,
+                  height: h * 0.06,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 10,
+                          spreadRadius: 4,
+                          offset: Offset(1, 1),
+                          color:Colors.grey.withOpacity(0.5),
+                        )
+                      ],
                       image: DecorationImage(
                         image: AssetImage(
                             "img/btn.jpg"
@@ -155,7 +163,7 @@ class _Create_PasswordState extends State<Create_Password> {
                     child: Text(
                       "Create Password",
                       style: TextStyle(
-                        fontSize: 22,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ),

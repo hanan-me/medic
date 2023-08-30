@@ -16,10 +16,10 @@ class _SignupPageState extends State<SignupPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   List dropDownListData = [
-    {"title": "Doctor", "value": "1"},
-    {"title": "Patient", "value": "2"},
-    {"title": "Lab Scientist", "value": "3"},
-    {"title": "Data Entry Operator", "value": "4"},
+    {"title": "Doctor", "value": "Doctor"},
+    {"title": "Patient", "value": "Patient"},
+    {"title": "Lab Scientist", "value": "Lab Scientist"},
+    {"title": "Data Entry Operator", "value": "Data Entry Operator"},
   ];
   String defaultValue = "";
   @override
@@ -90,7 +90,7 @@ class _SignupPageState extends State<SignupPage> {
                           ]
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.all(20),
+                        padding: EdgeInsets.only(left: w*0.05,right: w*0.03),
                         child: DropdownButtonHideUnderline(
                           child: DropdownButton<String>(
                               isDense: true,
@@ -174,6 +174,7 @@ class _SignupPageState extends State<SignupPage> {
                         recognizer: TapGestureRecognizer()
                           ..onTap = () => Get.to(() => LoginPage())
                     )),
+                    SizedBox(height: w * 0.02),
                     Padding(padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom)),
                   ],
                 ),

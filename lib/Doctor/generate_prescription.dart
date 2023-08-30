@@ -36,7 +36,7 @@ class _Generate_PrescriptionState extends State<Generate_Prescription> {
               Container(
                 child: Lottie.asset(
                   'animations/aFwlh3S3cv.json',
-                  height: h * 0.25,
+                  height: h * 0.2,
                   repeat: true,
                   reverse: true,
                   fit: BoxFit.cover,
@@ -46,7 +46,7 @@ class _Generate_PrescriptionState extends State<Generate_Prescription> {
                 "Generate Prescription",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 30,
+                  fontSize: 20,
                   color: Colors.teal,
                 ),
               ),
@@ -106,7 +106,7 @@ class _Generate_PrescriptionState extends State<Generate_Prescription> {
                       child: Text(
                         "Add More",
                         style: TextStyle(
-                          fontSize: 22,
+                          fontSize: 18,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                         ),
