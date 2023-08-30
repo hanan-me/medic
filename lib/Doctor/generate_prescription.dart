@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:lottie/lottie.dart';
+import 'package:medic/Accounts/Signup_Page.dart';
 import 'package:medic/Doctor/doc_dash.dart';
 class Generate_Prescription extends StatefulWidget {
   const Generate_Prescription({super.key});
@@ -56,43 +57,11 @@ class _Generate_PrescriptionState extends State<Generate_Prescription> {
                 itemBuilder: (context, index) {
                   return SingleChildScrollView(
                     padding: EdgeInsets.only(top: h*0.02),
-                    child: Column(
+                    child: Row(
                       children: [
-                        Container(
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(30),
-                                boxShadow: [
-                                  BoxShadow(
-                                    blurRadius: 10,
-                                    spreadRadius: 4,
-                                    offset: Offset(1, 1),
-                                    color: Colors.grey.withOpacity(0.4),
-                                  )
-                                ]
-                            ),
-                            child: TextField(
-                              controller: listController[index],
-                              decoration: InputDecoration(
-                                hintText: "Medicine Name",
-                                prefixIcon: Icon(Icons.medication, color: Colors.teal),
-                                focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(30),
-                                    borderSide: BorderSide(
-                                      color: Colors.white,
-                                      width: 1.0,
-                                    )
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(30),
-                                    borderSide: BorderSide(
-                                        color: Colors.white,
-                                        width: 1.0
-                                    )
-                                ),
-                              ),
-                            )
-                        ),
+                        Expanded(child: TextFieldWidget(hintText: "Medication",icon: Icons.medication,controler: listController[index],)),
+                        SizedBox(width: h*0.01,),
+                        Expanded(child: TextFieldWidget(hintText: "Duration",icon: Icons.timelapse,controler: listController[index],)),
                         index != 0
                             ? GestureDetector(
                                 onTap: (){
@@ -114,9 +83,7 @@ class _Generate_PrescriptionState extends State<Generate_Prescription> {
                   );
                 },
               ),
-              const SizedBox(
-                height: 50,
-              ),
+              SizedBox(height: h*0.05,),
               GestureDetector(
                 onTap: () {
                   setState(() {
