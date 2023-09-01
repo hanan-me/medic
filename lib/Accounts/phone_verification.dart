@@ -48,7 +48,7 @@ class _Phone_VerficationState extends State<Phone_Verfication> {
                 child: Column(
                   children: [
                     Text(
-                      "Sign in",
+                      "OTP",
                       style: TextStyle(
                         fontSize: 50,
                         color: Colors.teal,
