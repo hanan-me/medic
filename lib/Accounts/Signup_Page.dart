@@ -22,6 +22,18 @@ class _SignupPageState extends State<SignupPage> {
     {"title": "Data Entry Operator", "value": "Data Entry Operator"},
   ];
   String defaultValue = "";
+  DateTime dateTime = DateTime.now();
+  void _showDatePicker(){
+    showDatePicker(context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(1800),
+        lastDate: DateTime(2025)
+    ).then((value){
+      setState(() {
+        dateTime = value!;
+      });
+    });
+  }
   @override
   void dispose() {
     emailController.dispose();
@@ -90,7 +102,7 @@ class _SignupPageState extends State<SignupPage> {
                           ]
                       ),
                       child: Padding(
-                        padding: EdgeInsets.only(left: w*0.05,right: w*0.03),
+                        padding: EdgeInsets.only(left: w*0.07,right: w*0.03,),
                         child: DropdownButtonHideUnderline(
                           child: DropdownButton<String>(
                               isDense: true,
@@ -119,11 +131,47 @@ class _SignupPageState extends State<SignupPage> {
                       ),
                     ),
                     SizedBox(height: h * 0.01,),
-                    TextFieldWidget(hintText: "Your Name",icon: Icons.person,),
+                    TextFieldWidget(hintText: "Enter Name",icon: Icons.person,),
                     SizedBox(height: h * 0.01,),
                     TextFieldWidget(hintText: "Phone Number",icon: Icons.numbers_outlined,),
                     SizedBox(height: h * 0.01,),
-                    TextFieldWidget(hintText: "DOB",icon: Icons.date_range,),
+                    Container(
+                      padding: EdgeInsets.only(left: 40),
+                      height: 63,
+                      decoration:  BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(30),
+                          boxShadow: [
+                            BoxShadow(
+                              blurRadius: 10,
+                              spreadRadius: 7,
+                              offset: Offset(1, 1),
+                              color: Colors.grey.withOpacity(0.4),
+                            )
+                          ]
+                      ),
+                      child: Row(
+                        children: [
+                          Expanded(
+                              child: Container(
+                                child: Text(
+                                  '${dateTime.month}-${dateTime.day}-${dateTime.year}',
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              )
+                          ),
+                          Expanded(
+                            child: MaterialButton(
+                                padding: EdgeInsets.only(left: h*0.09),
+                                onPressed: _showDatePicker,
+                                child: Icon(Icons.calendar_month,color: Colors.teal,)
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                     SizedBox(height: h * 0.01,),
                     TextFieldWidget(hintText: "Gender",icon: Icons.person,),
                     SizedBox(height: h * 0.01,),

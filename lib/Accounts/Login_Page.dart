@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:medic/Accounts/Signup_Page.dart';
 import 'package:get/get.dart';
+import 'package:medic/Accounts/phone_verification.dart';
 import '../Auths/auth_controller.dart';
 import 'forget_password.dart';
 
@@ -122,7 +123,9 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                                 SizedBox(height: h*0.01,),
                                 GestureDetector(
-                                  onTap: (){},
+                                  onTap: (){
+                                    Navigator.pop(context);Get.to(()=> Phone_Verfication());
+                                  },
                                   child: Container(
                                     padding: EdgeInsets.all(20),
                                     decoration: BoxDecoration(

@@ -41,7 +41,7 @@ class AuthController extends GetxController{
   void register(String email, String password,String role) async{
     try{
       await auth.createUserWithEmailAndPassword(email: email, password: password)
-      .then((value) => {postDetailsToFirestore(email, role)});
+      .then((value) => {postDetailsToFirestore(email)});
     }
     catch(e){
       Get.snackbar("About User", "message",
@@ -59,10 +59,10 @@ class AuthController extends GetxController{
       );
     }
   }
-  postDetailsToFirestore(String email, String role) async {
+  postDetailsToFirestore(String email) async {
     var user = auth.currentUser;
     CollectionReference ref = firebaseFirestore.collection('Users');
-    ref.doc(user!.uid).set({'email': email, 'role': role});
+    ref.doc(user!.uid).set({'email': email});
     Get.offAll(()=>LoginPage());
   }
   void logIn(String email, String password) async{

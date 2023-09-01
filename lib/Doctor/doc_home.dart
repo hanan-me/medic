@@ -5,6 +5,8 @@ import 'package:medic/Doctor/doc_dash.dart';
 import 'package:medic/Doctor/generate_prescription.dart';
 import 'package:medic/Doctor/generate_report.dart';
 
+import '../Accounts/Login_Page.dart';
+
 class Doctor_Home extends StatefulWidget {
   const Doctor_Home({super.key});
 
@@ -22,7 +24,7 @@ class _Doctor_HomeState extends State<Doctor_Home> {
         backgroundColor: Colors.teal,
         leading: IconButton(onPressed:()=> Get.back(),icon: const Icon(Icons.arrow_back, color: Colors.white)),
         title: Text("Profile"),
-        // actions: [IconButton(onPressed:()=> Get.to(()=> LoginPage()),icon: const Icon(Icons.logout_outlined, color: Colors.white))],
+        actions: [IconButton(onPressed:()=> Get.to(()=> LoginPage()),icon: const Icon(Icons.logout_outlined, color: Colors.white))],
       ),
       resizeToAvoidBottomInset: false,
       // backgroundColor: Colors.white,
@@ -76,7 +78,7 @@ class _Doctor_HomeState extends State<Doctor_Home> {
               child: Row(
                 children:[
                   SizedBox(width: h*0.013,),
-                  ButtonWidget(title: "Profile", onPress: () {  },),
+                  ButtonWidget(title: "Profile", onPress: () { Get.to(DoctorDashboard()); },),
                   SizedBox(width: h*0.005,),
                   ButtonWidget(title: "Diagnose", onPress: () { Get.to(GenerateReport()); },),
                   SizedBox(width: h*0.005,),

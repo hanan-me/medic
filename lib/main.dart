@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
       // home: new LoginScreen(),
       debugShowCheckedModeBanner: false,
       home: CircularProgressIndicator(),
+      theme: ThemeData(primarySwatch: Colors.teal),
     );//MaterialApp
   }
 }
