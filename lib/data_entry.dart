@@ -6,14 +6,15 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 import 'Accounts/Login_Page.dart';
-class Lab_Scientist extends StatefulWidget {
-  const Lab_Scientist({super.key});
+
+class DataEntryOp extends StatefulWidget {
+  const DataEntryOp({super.key});
 
   @override
-  State<Lab_Scientist> createState() => _Lab_ScientistState();
+  State<DataEntryOp> createState() => _DataEntryOpState();
 }
 
-class _Lab_ScientistState extends State<Lab_Scientist> {
+class _DataEntryOpState extends State<DataEntryOp> {
   @override
   Widget build(BuildContext context) {
     FilePickerResult? result;
@@ -82,16 +83,16 @@ class _Lab_ScientistState extends State<Lab_Scientist> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Lab Scientist Name",
+                  "Data Entry Operator Name",
                   style: TextStyle(
                     fontSize: 28,
                     color: Colors.teal,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                Text(
-                    "Specialization"
-                )
+                // Text(
+                //     "Specialization"
+                // )
               ],
             ),
           ),
@@ -198,10 +199,10 @@ class _Lab_ScientistState extends State<Lab_Scientist> {
                         )
                     ),
                     child: isLoading?CircularProgressIndicator():TextButton(onPressed: (){pickFile();}, child: Text("Upload Tests",
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.white,
-                    ),
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                      ),
                     )),
                   ),
                 ),

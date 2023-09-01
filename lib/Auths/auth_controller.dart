@@ -1,19 +1,15 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medic/Login_Page.dart';
-import 'package:medic/Profile_Page.dart';
-import 'package:medic/Signup_Page.dart';
-import 'package:medic/SplashScreen.dart';
-import 'package:medic/doc_dash.dart';
-import 'package:medic/doctor_page.dart';
-import 'package:medic/doctor_profile.dart';
-import 'package:medic/generate_prescription.dart';
-import 'package:medic/getStarted.dart';
-import 'package:medic/get_otp.dart';
-import 'package:medic/lab_scientist.dart';
-import 'package:medic/patient_dash.dart';
+
+import 'package:medic/Starter/SplashScreen.dart';
+
+import 'package:medic/Doctor/doc_home.dart';
+
+import '../Accounts/Login_Page.dart';
+
 
 class AuthController extends GetxController{
   //AuthController.instance..
@@ -21,10 +17,11 @@ class AuthController extends GetxController{
   //email, password, name ....
   late Rx<User?> _user;
   FirebaseAuth auth = FirebaseAuth.instance;
+  FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 
   @override
   void onReady(){
-    // super.onReady();
+    super.onReady();
     _user = Rx<User?>(auth.currentUser);
     _user.bindStream(auth.userChanges());// to track user
     ever(_user, _initialScreens);
@@ -32,15 +29,16 @@ class AuthController extends GetxController{
   _initialScreens(User? user){
     if(user == null){
       print("Signup page");
-      Get.offAll(()=>Doctor_Page());
+      Get.offAll(()=>SplashScreen());
     }else{
       Get.offAll(()=>LoginPage());
     }
   }
 
-  void register(String email, String password) async{
+  void register(String email, String password,String role) async{
     try{
-      await auth.createUserWithEmailAndPassword(email: email, password: password);
+      await auth.createUserWithEmailAndPassword(email: email, password: password)
+      .then((value) => {postDetailsToFirestore(email, role)});
     }
     catch(e){
       Get.snackbar("About User", "message",
@@ -53,33 +51,26 @@ class AuthController extends GetxController{
           ),
         ),
         messageText: Text(
-          "Invalid Email or Password!",
+          e.toString(),
         )
       );
     }
   }
+  postDetailsToFirestore(String email, String role) async {
+    var user = auth.currentUser;
+    CollectionReference ref = firebaseFirestore.collection('Users');
+    ref.doc(user!.uid).set({'email': email, 'role': role});
+    Get.offAll(()=>LoginPage());
+  }
   void logIn(String email, String password, String value) async{
     try{
       await auth.signInWithEmailAndPassword(email: email, password: password);
-      // Get.offAll(()=>DoctorDashboard());
+      // route();
       if(value == "1"){
-        Get.offAll(()=>DoctorDashboard());
+        Get.offAll(()=>Doctor_Home());
+      }else{
+        print("Invalid Selection");
       }
-      if(value == "2"){
-        Get.offAll(()=>Patient_Dashboard());
-      }
-      else{
-        Get.offAll(()=>LoginPage());
-      }
-      // if(value == "1"){
-      //   Get.offAll(()=>DoctorDashboard());
-      // }
-      // if(value == "1"){
-      //   Get.offAll(()=>DoctorDashboard());
-      // }
-      // else {
-      //     Get.offAll(()=>DoctorDashboard());
-      //   }
     }
     catch(e){
       Get.snackbar("About Login", "message",
@@ -97,6 +88,24 @@ class AuthController extends GetxController{
       );
     }
   }
+  // void route() {
+  //   var user = auth.currentUser;
+  //   FirebaseFirestore.instance
+  //       .collection('Users')
+  //       .doc(user!.uid)
+  //       .get()
+  //       .then((DocumentSnapshot documentSnapshot) {
+  //     if (documentSnapshot.exists) {
+  //       if (documentSnapshot.get('role') == "1") {
+  //         Get.offAll(()=>Doctor_Home());
+  //       }else{
+  //         Get.offAll(()=>Patient_Dashboard());
+  //       }
+  //     } else {
+  //       print('Document does not exist on the database');
+  //     }
+  //   });
+  // }
   void logOut() async{
     await auth.signOut();
   }

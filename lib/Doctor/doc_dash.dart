@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:medic/doctor_page.dart';
-import 'package:medic/doctor_profile.dart';
+import 'package:medic/Doctor/doc_home.dart';
 
-import 'auth_controller.dart';
+
+import '../Auths/auth_controller.dart';
+import 'doctor_profile.dart';
 class DoctorDashboard extends StatefulWidget {
   const DoctorDashboard({super.key});
 
@@ -55,47 +56,10 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
                   ),
                 ),
                 SizedBox(height: h*0.035,),
-                GestureDetector(
-                  onTap: (){
-                    Get.to(Doctor_Profile());
-                  },
-                  child: Container(
-                      width: w*0.45,
-                      height: h*0.06,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          boxShadow: [
-                            BoxShadow(
-                              blurRadius: 10,
-                              spreadRadius: 4,
-                              offset: Offset(1, 1),
-                              color:Colors.grey.withOpacity(0.5),
-                            )
-                          ],
-                          gradient: LinearGradient(
-                            begin: Alignment.topRight,
-                            end: Alignment.bottomLeft,
-                            colors: [
-                              Colors.teal,
-                              Colors.teal,
-                            ],
-                          )
-                      ),
-                      child: Center(
-                        child: Text(
-                          "Edit Profile",
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        ),
-                      )
-                  ),
-                ),
+                RoundedBtnWidget( title: "Edit Profile",onPress: () { Get.to(DoctorDashboard()); },),
                 SizedBox(height: h*0.05,),
                 ProfileManage(title:"My Profile",icon: Icons.person,onPress:(){
-                  Get.to(Doctor_Page());
+                  Get.to(Doctor_Home());
                 }),
                 ProfileManage(title:"Messages",icon: Icons.message,onPress:(){}),
                 ProfileManage(title:"Appointments",icon: Icons.calendar_month,onPress:(){}),
@@ -110,6 +74,57 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
             ),
           ),
         ),
+    );
+  }
+}
+
+class RoundedBtnWidget extends StatelessWidget {
+  const RoundedBtnWidget({
+    super.key, this.title, required this.onPress,
+  });
+
+  final title;
+  final VoidCallback onPress;
+
+  @override
+  Widget build(BuildContext context) {
+    double w = MediaQuery.of(context).size.width;
+    double h = MediaQuery.of(context).size.height;
+    return GestureDetector(
+      onTap: onPress,
+      child: Container(
+          width: w*0.45,
+          height: h*0.06,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(30),
+              boxShadow: [
+                BoxShadow(
+                  blurRadius: 10,
+                  spreadRadius: 4,
+                  offset: Offset(1, 1),
+                  color:Colors.grey.withOpacity(0.5),
+                )
+              ],
+              gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                colors: [
+                  Colors.teal,
+                  Colors.teal,
+                ],
+              )
+          ),
+          child: Center(
+            child: Text(
+              title,
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+          )
+      ),
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:medic/Login_Page.dart';
-import 'package:medic/Signup_Page.dart';
+import 'package:medic/Accounts/Signup_Page.dart';
+
+import '../Accounts/Login_Page.dart';
 class GetStarted extends StatefulWidget {
   const GetStarted({super.key});
 

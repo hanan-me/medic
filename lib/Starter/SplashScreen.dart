@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:medic/getStarted.dart';
+
+import 'getStarted.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

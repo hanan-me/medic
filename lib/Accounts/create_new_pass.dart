@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:lottie/lottie.dart';
-import 'package:medic/Login_Page.dart';
 
+
+import 'Login_Page.dart';
 import 'get_otp.dart';
 class Create_Password extends StatefulWidget {
   const Create_Password({super.key});
