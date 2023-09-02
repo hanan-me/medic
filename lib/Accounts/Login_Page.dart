@@ -72,9 +72,38 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     SizedBox(height: w*0.07,),
                     SizedBox(height: w*0.04,),
-                    TextFieldWidget(hintText: "Your Email",icon: Icons.email,controler: emailController),
+                    TextFieldWidget(hintText: "Your Email",
+                      icon: Icons.email,
+                      controler: emailController,
+                      validator: (value) {
+                        if (value!.length == 0) {
+                          return "Email cannot be empty";
+                        }
+                        if (!RegExp(
+                            "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+                            .hasMatch(value)) {
+                          return ("Please enter a valid email");
+                        } else {
+                          return null;
+                        }
+                      },
+                    ),
                     SizedBox(height: w*0.04,),
-                    TextFieldWidget(hintText: "Password",icon: Icons.password_rounded,controler: passwordController,bol: true,),
+                    TextFieldWidget(hintText: "Password",icon: Icons.password_rounded,
+                      controler: passwordController,
+                      bol: true,
+                      validator: (value) {
+                        RegExp regex = new RegExp(r'^.{6,}$');
+                        if (value!.isEmpty) {
+                          return "Password cannot be empty";
+                        }
+                        if (!regex.hasMatch(value)) {
+                          return ("please enter valid password min. 6 character");
+                        } else {
+                          return null;
+                        }
+                      },
+                    ),
                     SizedBox(height: w*0.04,),
                     Align(
                       alignment: Alignment.centerRight,

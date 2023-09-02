@@ -93,7 +93,7 @@ class AuthController extends GetxController{
           ),
         ),
         messageText: Text(
-          "Invalid email or password!",
+          e.toString(),
         )
       );
     }
@@ -173,14 +173,30 @@ class AuthController extends GetxController{
     }
   }
   void checkPatientId(String email){
-   FirebaseFirestore.instance
-        .collection('Users')
-        .where("Email", isEqualTo: email)
-        .get().then((QuerySnapshot query){
-          query.docs.forEach((element) {
-            print(element.data());
-            print(element.id);
-          });
-   });
+   try{
+     FirebaseFirestore.instance
+         .collection('Users')
+         .where("Email", isEqualTo: email)
+         .get().then((QuerySnapshot query){
+       query.docs.forEach((element) {
+         print(element.data());
+         print(element.id);
+       });
+     });
+   }catch(e){
+     Get.snackbar("Check", "message",
+         backgroundColor: Colors.redAccent,
+         snackPosition: SnackPosition.BOTTOM,
+         titleText: Text(
+           "Invalid Cnic Number",
+           style: TextStyle(
+               color: Colors.white
+           ),
+         ),
+         messageText: Text(
+           e.toString(),
+         )
+     );
+   }
   }
 }

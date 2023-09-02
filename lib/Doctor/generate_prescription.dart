@@ -64,9 +64,12 @@ class _Generate_PrescriptionState extends State<Generate_Prescription> {
                     padding: EdgeInsets.only(top: h*0.02),
                     child: Row(
                       children: [
-                        Expanded(child: TextFieldWidget(hintText: "Medication",icon: Icons.medication,controler: listController[index],)),
+                        Expanded(child: TextFieldWidget(hintText: "Medication",
+                          icon: Icons.medication,
+                          controler: listController[index],validator: (value){})),
                         SizedBox(width: h*0.01,),
-                        Expanded(child: TextFieldWidget(hintText: "Duration",icon: Icons.timelapse,)),
+                        Expanded(child: TextFieldWidget(hintText: "Duration",icon: Icons.timelapse,
+                            validator: (value){})),
                         if (index != 0) GestureDetector(
                                 onTap: (){
                                   setState(() {
