@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:medic/Auths/auth_controller.dart';
 import 'package:medic/Doctor/doc_dash.dart';
 import 'package:medic/Doctor/generate_prescription.dart';
 import 'package:medic/Doctor/generate_report.dart';
@@ -24,7 +25,7 @@ class _Doctor_HomeState extends State<Doctor_Home> {
         backgroundColor: Colors.teal,
         leading: IconButton(onPressed:()=> Get.back(),icon: const Icon(Icons.arrow_back, color: Colors.white)),
         title: Text("Profile"),
-        actions: [IconButton(onPressed:()=> Get.to(()=> LoginPage()),icon: const Icon(Icons.logout_outlined, color: Colors.white))],
+        actions: [IconButton(onPressed:(){AuthController.instance.logOut();},icon: const Icon(Icons.logout_outlined, color: Colors.white))],
       ),
       resizeToAvoidBottomInset: false,
       // backgroundColor: Colors.white,
@@ -78,9 +79,9 @@ class _Doctor_HomeState extends State<Doctor_Home> {
               child: Row(
                 children:[
                   SizedBox(width: h*0.013,),
-                  ButtonWidget(title: "Profile", onPress: () { Get.to(DoctorDashboard()); },),
+                  ButtonWidget(title: "Profile", onPress: () { Get.to(()=>GenerateReport()); },),
                   SizedBox(width: h*0.005,),
-                  ButtonWidget(title: "Diagnose", onPress: () { Get.to(GenerateReport()); },),
+                  ButtonWidget(title: "Diagnose", onPress: () { Get.to(()=>GenerateReport()); },),
                   SizedBox(width: h*0.005,),
                   ButtonWidget(title: "Patient History", onPress: () {  },),
                 ]

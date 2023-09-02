@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:medic/Accounts/Signup_Page.dart';
+import 'package:medic/Auths/auth_controller.dart';
 import 'package:medic/Doctor/doc_dash.dart';
 
 import 'doc_home.dart';
@@ -14,6 +15,7 @@ class GenerateReport extends StatefulWidget {
 }
 
 class _GenerateReportState extends State<GenerateReport> {
+  final emailControler = TextEditingController();
   @override
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
@@ -31,8 +33,8 @@ class _GenerateReportState extends State<GenerateReport> {
         children: [
           Padding(
             padding: EdgeInsets.only(top: h*0.18,left: h*0.03,right: h*0.03,bottom: h*0.04),
-              child: TextFieldWidget(hintText: "Patient Id..",icon: Icons.numbers,)),
-          RoundedBtnWidget( title: "Check",onPress: (){}),
+              child: TextFieldWidget(hintText: "Enter Patient CNIC..",icon: Icons.numbers,controler: emailControler,)),
+          RoundedBtnWidget( title: "Check",onPress: (){AuthController.instance.checkPatientId(emailControler.text);}),
           SizedBox(height: h*0.04,),
           Expanded(
             child: GridView.count(

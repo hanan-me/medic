@@ -1,9 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:lottie/lottie.dart';
 import 'package:medic/Accounts/Signup_Page.dart';
 import 'package:medic/Doctor/doc_dash.dart';
+
+import '../Auths/auth_controller.dart';
 class Generate_Prescription extends StatefulWidget {
   const Generate_Prescription({super.key});
 
@@ -13,6 +17,7 @@ class Generate_Prescription extends StatefulWidget {
 
 class _Generate_PrescriptionState extends State<Generate_Prescription> {
   List<TextEditingController> listController = [TextEditingController()];
+  var count = 0;
   @override
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
@@ -61,9 +66,8 @@ class _Generate_PrescriptionState extends State<Generate_Prescription> {
                       children: [
                         Expanded(child: TextFieldWidget(hintText: "Medication",icon: Icons.medication,controler: listController[index],)),
                         SizedBox(width: h*0.01,),
-                        Expanded(child: TextFieldWidget(hintText: "Duration",icon: Icons.timelapse,controler: listController[index],)),
-                        index != 0
-                            ? GestureDetector(
+                        Expanded(child: TextFieldWidget(hintText: "Duration",icon: Icons.timelapse,)),
+                        if (index != 0) GestureDetector(
                                 onTap: (){
                                   setState(() {
                                     listController[index].clear();
@@ -76,43 +80,82 @@ class _Generate_PrescriptionState extends State<Generate_Prescription> {
                                 color: Colors.red,
                                 size: 35,
                               ),
-                            )
-                            :const SizedBox(),
+                            ) else const SizedBox(),
                       ],
                     ),
                   );
                 },
               ),
               SizedBox(height: h*0.05,),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    listController.add(TextEditingController());
-                  });
-                },
-                child: Container(
-                    width: w * 0.4,
-                    height: h * 0.055,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        image: DecorationImage(
-                          image: AssetImage(
-                              "img/btn.jpg"
+              Row(
+                children: [
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        count += 1;
+                        setState(() {
+                          listController.add(TextEditingController());
+                        });
+                      },
+                      child: Container(
+                          margin: EdgeInsets.only(left: h*0.03,right: h*0.01),
+                          width: w * 0.4,
+                          height: h * 0.055,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(30),
+                              image: DecorationImage(
+                                image: AssetImage(
+                                    "img/btn.jpg"
+                                ),
+                                fit: BoxFit.cover,
+                              )
                           ),
-                          fit: BoxFit.cover,
-                        )
-                    ),
-                    child: Center(
-                      child: Text(
-                        "Add More",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
+                          child: Center(
+                            child: Text(
+                              "Add More",
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          )
                       ),
-                    )
-                ),
+                    ),
+                  ),
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        print(listController[count].text);
+                        AuthController.instance.generatePrescription(listController[0].text);
+                      },
+                      child: Container(
+                          margin: EdgeInsets.only(left: h*0.01,right: h*0.03),
+                          width: w * 0.4,
+                          height: h * 0.055,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(30),
+                              image: DecorationImage(
+                                image: AssetImage(
+                                    "img/btn.jpg"
+                                ),
+                                fit: BoxFit.cover,
+                              )
+                          ),
+                          child: Center(
+                            child: Text(
+                              "Prescribe",
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          )
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

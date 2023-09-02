@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:medic/Accounts/Signup_Page.dart';
 import 'package:get/get.dart';
 import 'package:medic/Accounts/phone_verification.dart';
+import 'package:medic/Doctor/doc_dash.dart';
 import '../Auths/auth_controller.dart';
 import 'forget_password.dart';
 
@@ -208,6 +209,7 @@ class _LoginPageState extends State<LoginPage> {
                           )
                         ]
                     )),
+                    RoundedBtnWidget(title: "Logout",onPress: (){AuthController.instance.logOut();},),
                     Padding(padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom)),
                   ],
                 ),

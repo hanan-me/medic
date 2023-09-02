@@ -17,9 +17,12 @@ import '../Patient/patient_dash.dart';
 class AuthController extends GetxController{
   //AuthController.instance..
   static AuthController instance = Get.find();
+  var id = "";
   //email, password, name ....
+  final _users = Rxn<User>();
   late Rx<User?> _user;
   FirebaseAuth auth = FirebaseAuth.instance;
+  late Stream<User?> authStateChanges;
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 
   @override
@@ -38,10 +41,10 @@ class AuthController extends GetxController{
     }
   }
 
-  void register(String email, String password,String role) async{
+  void register(String name, String num,String cnic,String email, String password,String role) async{
     try{
       await auth.createUserWithEmailAndPassword(email: email, password: password)
-      .then((value) => {postDetailsToFirestore(email)});
+      .then((value) => {postDetailsToFirestore(name,num,cnic,email,role)});
     }
     catch(e){
       Get.snackbar("About User", "message",
@@ -59,16 +62,25 @@ class AuthController extends GetxController{
       );
     }
   }
-  postDetailsToFirestore(String email) async {
+  postDetailsToFirestore(String name, String num,String cnic,String email,String role) async {
     var user = auth.currentUser;
     CollectionReference ref = firebaseFirestore.collection('Users');
-    ref.doc(user!.uid).set({'email': email});
+    ref.doc(user!.uid).set({'Role':role,'Email': email,'CNIC':cnic,'Phone Number': num,'Name': name});
     Get.offAll(()=>LoginPage());
+  }
+  getUserid(){
+    authStateChanges = auth.authStateChanges();
+    authStateChanges.listen((User? user) {
+      _users.value = user;
+      id = user!.uid;
+      print("User id ${id}");
+    });
   }
   void logIn(String email, String password) async{
     try{
       await auth.signInWithEmailAndPassword(email: email, password: password);
       route();
+      // getUserid();
     }
     catch(e){
       Get.snackbar("About Login", "message",
@@ -81,7 +93,7 @@ class AuthController extends GetxController{
           ),
         ),
         messageText: Text(
-          "Empty Fields",
+          "Invalid email or password!",
         )
       );
     }
@@ -94,7 +106,10 @@ class AuthController extends GetxController{
         .get()
         .then((DocumentSnapshot documentSnapshot) {
       if (documentSnapshot.exists) {
-        if (documentSnapshot.get('role') == "Doctor") {
+        if (documentSnapshot.get('Role') == "Doctor") {
+          print(FirebaseFirestore.instance
+              .collection('Users')
+              .doc(user!.uid));
           Get.offAll(()=>Doctor_Home());
         }else{
           if (documentSnapshot.get('role') == "Patient") {
@@ -130,5 +145,42 @@ class AuthController extends GetxController{
   }
   void logOut() async{
     await auth.signOut();
+  }
+
+
+
+  void generatePrescription(String med) async{
+    try{
+      var user = auth.currentUser;
+      CollectionReference ref = firebaseFirestore.collection('Users');
+      ref.doc(user!.uid).set({'Medicine': med});
+      Get.offAll(()=>Doctor_Home());
+    }
+    catch(e){
+      Get.snackbar("Prescription", "message",
+          backgroundColor: Colors.redAccent,
+          snackPosition: SnackPosition.BOTTOM,
+          titleText: Text(
+            "Failed to Prescribe!!",
+            style: TextStyle(
+                color: Colors.white
+            ),
+          ),
+          messageText: Text(
+            "Something went wrong!!",
+          )
+      );
+    }
+  }
+  void checkPatientId(String email){
+   FirebaseFirestore.instance
+        .collection('Users')
+        .where("Email", isEqualTo: email)
+        .get().then((QuerySnapshot query){
+          query.docs.forEach((element) {
+            print(element.data());
+            print(element.id);
+          });
+   });
   }
 }

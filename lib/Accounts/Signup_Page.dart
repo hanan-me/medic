@@ -15,6 +15,10 @@ class SignupPage extends StatefulWidget {
 class _SignupPageState extends State<SignupPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final numberController = TextEditingController();
+  final cnicController = TextEditingController();
+  final genderController = TextEditingController();
+  final nameController = TextEditingController();
   List dropDownListData = [
     {"title": "Doctor", "value": "Doctor"},
     {"title": "Patient", "value": "Patient"},
@@ -131,9 +135,9 @@ class _SignupPageState extends State<SignupPage> {
                       ),
                     ),
                     SizedBox(height: h * 0.01,),
-                    TextFieldWidget(hintText: "Enter Name",icon: Icons.person,),
+                    TextFieldWidget(hintText: "Enter Name",icon: Icons.person,controler: nameController,),
                     SizedBox(height: h * 0.01,),
-                    TextFieldWidget(hintText: "Phone Number",icon: Icons.numbers_outlined,),
+                    TextFieldWidget(hintText: "Phone Number",icon: Icons.phone,type: TextInputType.phone,controler: numberController,),
                     SizedBox(height: h * 0.01,),
                     Container(
                       padding: EdgeInsets.only(left: 40),
@@ -175,7 +179,7 @@ class _SignupPageState extends State<SignupPage> {
                     SizedBox(height: h * 0.01,),
                     TextFieldWidget(hintText: "Gender",icon: Icons.person,),
                     SizedBox(height: h * 0.01,),
-                    TextFieldWidget(hintText: "CNIC",icon: Icons.numbers_outlined,),
+                    TextFieldWidget(hintText: "CNIC",icon: Icons.numbers_outlined,controler: cnicController,),
                     SizedBox(height: h * 0.01,),
                     TextFieldWidget(hintText: "Email",icon: Icons.email_outlined,controler: emailController),
                     SizedBox(height: h * 0.01,),
@@ -185,8 +189,12 @@ class _SignupPageState extends State<SignupPage> {
                     SizedBox(height: h * 0.03,),
                     GestureDetector(
                       onTap: () {
-                        AuthController.instance.register(emailController.text.trim(),
-                            passwordController.text.trim(),defaultValue);
+                        AuthController.instance.register(nameController.text.trim(),
+                            numberController.text.trim(),
+                            cnicController.text.trim(),
+                            emailController.text.trim(),
+                            passwordController.text.trim(),
+                            defaultValue);
                       },
                       child: Container(
                           width: w * 0.4,
@@ -269,11 +277,12 @@ class _SignupPageState extends State<SignupPage> {
 
 class TextFieldWidget extends StatelessWidget {
   const TextFieldWidget({
-    super.key, this.icon, this.hintText, this.controler, this.bol = false,
+    super.key, this.icon, this.hintText, this.controler, this.bol = false, this.type,
 
   });
 
   final icon;
+  final type;
   final hintText;
   final controler;
   final bool bol;
@@ -294,6 +303,7 @@ class TextFieldWidget extends StatelessWidget {
         ),
         child: TextField(
           controller: controler,
+          keyboardType: type,
           obscureText: bol,
           decoration: InputDecoration(
             hintText: hintText,
