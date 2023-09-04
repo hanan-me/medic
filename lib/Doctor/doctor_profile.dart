@@ -79,7 +79,7 @@ class _Doctor_ProfileState extends State<Doctor_Profile> {
                 margin: const EdgeInsets.only(left: 20,right: 20),
                 decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(30),
+                    borderRadius: BorderRadius.circular(18),
                     boxShadow: [
                       BoxShadow(
                         blurRadius: 10,
@@ -94,14 +94,14 @@ class _Doctor_ProfileState extends State<Doctor_Profile> {
                     hintText: "Specialization",
                     prefixIcon: Icon(Icons.more_horiz, color:Colors.teal),
                     focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
+                        borderRadius: BorderRadius.circular(18),
                         borderSide: BorderSide(
                           color: Colors.white,
                           width: 1.0,
                         )
                     ),
                     enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
+                        borderRadius: BorderRadius.circular(18),
                         borderSide: BorderSide(
                             color: Colors.white,
                             width: 1.0
@@ -115,7 +115,7 @@ class _Doctor_ProfileState extends State<Doctor_Profile> {
                 margin: const EdgeInsets.only(left: 20,right: 20),
                 decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(30),
+                    borderRadius: BorderRadius.circular(18),
                     boxShadow: [
                       BoxShadow(
                         blurRadius: 10,
@@ -130,14 +130,14 @@ class _Doctor_ProfileState extends State<Doctor_Profile> {
                     hintText: "Working at..",
                     prefixIcon: Icon(Icons.local_hospital, color:Colors.teal),
                     focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
+                        borderRadius: BorderRadius.circular(18),
                         borderSide: BorderSide(
                           color: Colors.white,
                           width: 1.0,
                         )
                     ),
                     enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
+                        borderRadius: BorderRadius.circular(18),
                         borderSide: BorderSide(
                             color: Colors.white,
                             width: 1.0
@@ -151,7 +151,7 @@ class _Doctor_ProfileState extends State<Doctor_Profile> {
                 margin: const EdgeInsets.only(left: 20,right: 20),
                 decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(30),
+                    borderRadius: BorderRadius.circular(18),
                     boxShadow: [
                       BoxShadow(
                         blurRadius: 10,
@@ -166,14 +166,14 @@ class _Doctor_ProfileState extends State<Doctor_Profile> {
                     hintText: "About Yourself..",
                     // prefixIcon: Icon(Icons., color:Colors.teal),
                     focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
+                        borderRadius: BorderRadius.circular(18),
                         borderSide: BorderSide(
                           color: Colors.white,
                           width: 1.0,
                         )
                     ),
                     enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
+                        borderRadius: BorderRadius.circular(18),
                         borderSide: BorderSide(
                             color: Colors.white,
                             width: 1.0
@@ -188,7 +188,7 @@ class _Doctor_ProfileState extends State<Doctor_Profile> {
                 width: w*0.4,
                 height: h*0.06,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
+                    borderRadius: BorderRadius.circular(18),
                     boxShadow: [
                       BoxShadow(
                         blurRadius: 8,

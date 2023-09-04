@@ -20,7 +20,6 @@ class _SignupPageState extends State<SignupPage> {
   final genderController = TextEditingController();
   final nameController = TextEditingController();
 
-  final _formkey = GlobalKey<FormState>();
 
   List dropDownListData = [
     {"title": "Doctor", "value": "Doctor"},
@@ -57,7 +56,6 @@ class _SignupPageState extends State<SignupPage> {
     ];
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
-    var _value = "-1";
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
@@ -83,197 +81,190 @@ class _SignupPageState extends State<SignupPage> {
               child: SingleChildScrollView(
                 reverse: true,
                 // physics: BouncingScrollPhysics(),
-                child: Form(
-                  key: _formkey,
-                  child: Column(
-                    // crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Register your account",
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.grey[500],
-                        ),
+                child: Column(
+                  // crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Register your account",
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.grey[500],
                       ),
-                      SizedBox(height: h * 0.02,),
-                      Container(
-                        height: h*0.07,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(30),
-                            boxShadow: [
-                              BoxShadow(
-                                blurRadius: 10,
-                                spreadRadius: 7,
-                                offset: Offset(1, 1),
-                                color: Colors.grey.withOpacity(0.4),
-                              )
-                            ]
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.only(left: w*0.07,right: w*0.03,),
-                          child: DropdownButtonHideUnderline(
-                            child: DropdownButton<String>(
-                                isDense: true,
-                                value: defaultValue,
-                                isExpanded: true,
-                                menuMaxHeight: 350,
-                                items: [
-                                  const DropdownMenuItem(
-                                      child: Text(
-                                        "SignUp as",
-                                        style: TextStyle(color: Colors.black54),
-                                      ),
-                                      value: ""),
-                                  ...dropDownListData.map<DropdownMenuItem<String>>((data) {
-                                    return DropdownMenuItem(
-                                        child: Text(data['title']), value: data['value']);
-                                  }).toList(),
-                                ],
-                                onChanged: (value) {
-                                  // print("selected Value $value");
-                                  setState(() {
-                                    defaultValue = value!;
-                                  });
-                                }),
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: h * 0.01,),
-                      TextFieldWidget(hintText: "Enter Name",icon: Icons.person,
-                        controler: nameController,
-                      validator: (value){},),
-                      SizedBox(height: h * 0.01,),
-                      TextFieldWidget(hintText: "Phone Number",icon: Icons.phone,
-                        type: TextInputType.phone,
-                        controler: numberController,
-                          validator: (value){}),
-                      SizedBox(height: h * 0.01,),
-                      Container(
-                        padding: EdgeInsets.only(left: 40),
-                        height: 63,
-                        decoration:  BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(30),
-                            boxShadow: [
-                              BoxShadow(
-                                blurRadius: 10,
-                                spreadRadius: 7,
-                                offset: Offset(1, 1),
-                                color: Colors.grey.withOpacity(0.4),
-                              )
-                            ]
-                        ),
-                        child: Row(
-                          children: [
-                            Expanded(
-                                child: Container(
-                                  child: Text(
-                                    '${dateTime.month}-${dateTime.day}-${dateTime.year}',
-                                    style: TextStyle(
-                                      fontSize: 15,
-                                    ),
-                                  ),
-                                )
-                            ),
-                            Expanded(
-                              child: MaterialButton(
-                                  padding: EdgeInsets.only(left: h*0.09),
-                                  onPressed: _showDatePicker,
-                                  child: Icon(Icons.calendar_month,color: Colors.teal,)
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: h * 0.01,),
-                      TextFieldWidget(hintText: "Gender",icon: Icons.person,
-                          validator: (value){}),
-                      SizedBox(height: h * 0.01,),
-                      TextFieldWidget(hintText: "CNIC",icon: Icons.numbers_outlined,
-                        controler: cnicController,validator: (value){}),
-                      SizedBox(height: h * 0.01,),
-                      TextFieldWidget(hintText: "Email",icon: Icons.email_outlined,
-                          controler: emailController,validator: (value){
-                            if (value!.length == 0) {
-                              return "Email cannot be empty";
-                            }
-                            if (!RegExp(
-                                "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
-                                .hasMatch(value)) {
-                              return ("Please enter a valid email");
-                            } else {
-                              return null;
-                            }
-                          }),
-                      SizedBox(height: h * 0.01,),
-                      TextFieldWidget(
-                        hintText: "Password",icon: Icons.password_rounded,
-                        controler: passwordController,bol: true,
-                          validator: (value){
-                            RegExp regex = new RegExp(r'^.{6,}$');
-                            if (value!.isEmpty) {
-                              return "Password cannot be empty";
-                            }
-                            if (!regex.hasMatch(value)) {
-                              return ("please enter valid password min. 6 character");
-                            } else {
-                              return null;
-                            }
-                          }),
-                      SizedBox(height: h * 0.01,),
-                      SizedBox(height: h * 0.03,),
-                      GestureDetector(
-                        onTap: () {
-                          if(_formkey.currentState!.validate()){
-                            AuthController.instance.register(nameController.text.trim(),
-                                numberController.text.trim(),
-                                cnicController.text.trim(),
-                                emailController.text.trim(),
-                                passwordController.text.trim(),
-                                defaultValue);
-                          }else{
-                            print("Something went wrong!");
-                          }
-                        },
-                        child: Container(
-                            width: w * 0.4,
-                            height: h * 0.06,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(30),
-                                image: DecorationImage(
-                                  image: AssetImage(
-                                      "img/btn.jpg"
-                                  ),
-                                  fit: BoxFit.cover,
-                                )
-                            ),
-                            child: Center(
-                              child: Text(
-                                "Sign up",
-                                style: TextStyle(
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
-                              ),
+                    ),
+                    SizedBox(height: h * 0.02,),
+                    Container(
+                      height: h*0.07,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(18),
+                          boxShadow: [
+                            BoxShadow(
+                              blurRadius: 10,
+                              spreadRadius: 7,
+                              offset: Offset(1, 1),
+                              color: Colors.grey.withOpacity(0.4),
                             )
+                          ]
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.only(left: w*0.07,right: w*0.03,),
+                        child: DropdownButtonHideUnderline(
+                          child: DropdownButton<String>(
+                              isDense: true,
+                              value: defaultValue,
+                              isExpanded: true,
+                              menuMaxHeight: 350,
+                              items: [
+                                const DropdownMenuItem(
+                                    child: Text(
+                                      "SignUp as",
+                                      style: TextStyle(color: Colors.black54),
+                                    ),
+                                    value: ""),
+                                ...dropDownListData.map<DropdownMenuItem<String>>((data) {
+                                  return DropdownMenuItem(
+                                      child: Text(data['title']), value: data['value']);
+                                }).toList(),
+                              ],
+                              onChanged: (value) {
+                                // print("selected Value $value");
+                                setState(() {
+                                  defaultValue = value!;
+                                });
+                              }),
                         ),
                       ),
-                      SizedBox(height: w * 0.01,),
-                      RichText(text: TextSpan(
-                          text: "Already have an account?",
-                          style: TextStyle(
-                              color: Colors.grey[500],
-                              fontSize: 16
+                    ),
+                    SizedBox(height: h * 0.01,),
+                    TextFieldWidget(hintText: "Enter Name",icon: Icons.person,
+                      controler: nameController,
+                    validator: (value){},),
+                    SizedBox(height: h * 0.01,),
+                    TextFieldWidget(hintText: "Phone Number",icon: Icons.phone,
+                      type: TextInputType.phone,
+                      controler: numberController,
+                        validator: (value){}),
+                    SizedBox(height: h * 0.01,),
+                    Container(
+                      padding: EdgeInsets.only(left: 40),
+                      height: 63,
+                      decoration:  BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(18),
+                          boxShadow: [
+                            BoxShadow(
+                              blurRadius: 10,
+                              spreadRadius: 7,
+                              offset: Offset(1, 1),
+                              color: Colors.grey.withOpacity(0.4),
+                            )
+                          ]
+                      ),
+                      child: Row(
+                        children: [
+                          Expanded(
+                              child: Container(
+                                child: Text(
+                                  '${dateTime.month}-${dateTime.day}-${dateTime.year}',
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              )
                           ),
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () => Get.to(() => LoginPage())
-                      )),
-                      SizedBox(height: w * 0.02),
-                      Padding(padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom)),
-                    ],
-                  ),
+                          Expanded(
+                            child: MaterialButton(
+                                padding: EdgeInsets.only(left: h*0.09),
+                                onPressed: _showDatePicker,
+                                child: Icon(Icons.calendar_month,color: Colors.teal,)
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: h * 0.01,),
+                    TextFieldWidget(hintText: "Gender",icon: Icons.person,
+                        validator: (value){}),
+                    SizedBox(height: h * 0.01,),
+                    TextFieldWidget(hintText: "CNIC",icon: Icons.numbers_outlined,
+                      controler: cnicController,validator: (value){}),
+                    SizedBox(height: h * 0.01,),
+                    TextFieldWidget(hintText: "Email",icon: Icons.email_outlined,
+                        controler: emailController,validator: (value){
+                          if (value!.length == 0) {
+                            return "Email cannot be empty";
+                          }
+                          if (!RegExp(
+                              "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+                              .hasMatch(value)) {
+                            return ("Please enter a valid email");
+                          } else {
+                            return null;
+                          }
+                        }),
+                    SizedBox(height: h * 0.01,),
+                    TextFieldWidget(
+                      hintText: "Password",icon: Icons.password_rounded,
+                      controler: passwordController,bol: true,
+                        validator: (value){
+                          RegExp regex = new RegExp(r'^.{6,}$');
+                          if (value!.isEmpty) {
+                            return "Password cannot be empty";
+                          }
+                          if (!regex.hasMatch(value)) {
+                            return ("please enter valid password min. 6 character");
+                          } else {
+                            return null;
+                          }
+                        }),
+                    SizedBox(height: h * 0.01,),
+                    SizedBox(height: h * 0.03,),
+                    GestureDetector(
+                      onTap: () {
+                        AuthController.instance.register(nameController.text.trim(),
+                            numberController.text.trim(),
+                            cnicController.text.trim(),
+                            emailController.text.trim(),
+                            passwordController.text.trim(),
+                            defaultValue);
+                      },
+                      child: Container(
+                          width: w * 0.4,
+                          height: h * 0.06,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(18),
+                              image: DecorationImage(
+                                image: AssetImage(
+                                    "img/btn.jpg"
+                                ),
+                                fit: BoxFit.cover,
+                              )
+                          ),
+                          child: Center(
+                            child: Text(
+                              "Sign up",
+                              style: TextStyle(
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          )
+                      ),
+                    ),
+                    SizedBox(height: w * 0.01,),
+                    RichText(text: TextSpan(
+                        text: "Already have an account?",
+                        style: TextStyle(
+                            color: Colors.grey[500],
+                            fontSize: 16
+                        ),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () => Get.to(() => LoginPage())
+                    )),
+                    SizedBox(height: w * 0.03),
+                    Padding(padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom)),
+                  ],
                 ),
               ),
             ),
@@ -300,7 +291,7 @@ class TextFieldWidget extends StatelessWidget {
     return Container(
         decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(30),
+            borderRadius: BorderRadius.circular(18),
             boxShadow: [
               BoxShadow(
                 blurRadius: 10,
@@ -318,14 +309,14 @@ class TextFieldWidget extends StatelessWidget {
             hintText: hintText,
             prefixIcon: Icon(icon, color: Colors.teal),
             focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(30),
+                borderRadius: BorderRadius.circular(18),
                 borderSide: BorderSide(
                   color: Colors.white,
                   width: 1.0,
                 )
             ),
             enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(30),
+                borderRadius: BorderRadius.circular(18),
                 borderSide: BorderSide(
                     color: Colors.white,
                     width: 1.0

@@ -60,7 +60,7 @@ class _Create_PasswordState extends State<Create_Password> {
                   Container(
                       decoration: BoxDecoration(
                           color: Colors.white,
-                          borderRadius: BorderRadius.circular(30),
+                          borderRadius: BorderRadius.circular(18),
                           boxShadow: [
                             BoxShadow(
                               blurRadius: 10,
@@ -77,14 +77,14 @@ class _Create_PasswordState extends State<Create_Password> {
                           hintText: "Enter New Password",
                           prefixIcon: Icon(Icons.password_rounded, color:Colors.teal),
                           focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30),
+                              borderRadius: BorderRadius.circular(18),
                               borderSide: BorderSide(
                                 color: Colors.white,
                                 width: 1.0,
                               )
                           ),
                           enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30),
+                              borderRadius: BorderRadius.circular(18),
                               borderSide: BorderSide(
                                   color: Colors.white,
                                   width: 1.0
@@ -97,7 +97,7 @@ class _Create_PasswordState extends State<Create_Password> {
                   Container(
                       decoration: BoxDecoration(
                           color: Colors.white,
-                          borderRadius: BorderRadius.circular(30),
+                          borderRadius: BorderRadius.circular(18),
                           boxShadow: [
                             BoxShadow(
                               blurRadius: 10,
@@ -114,14 +114,14 @@ class _Create_PasswordState extends State<Create_Password> {
                           hintText: "Confirm Password",
                           prefixIcon: Icon(Icons.password, color:Colors.teal),
                           focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30),
+                              borderRadius: BorderRadius.circular(18),
                               borderSide: BorderSide(
                                 color: Colors.white,
                                 width: 1.0,
                               )
                           ),
                           enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30),
+                              borderRadius: BorderRadius.circular(18),
                               borderSide: BorderSide(
                                   color: Colors.white,
                                   width: 1.0
@@ -143,7 +143,7 @@ class _Create_PasswordState extends State<Create_Password> {
                   width: w * 0.58,
                   height: h * 0.06,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(18),
                       boxShadow: [
                         BoxShadow(
                           blurRadius: 10,

@@ -32,31 +32,6 @@ class _GenerateReportState extends State<GenerateReport> {
       // backgroundColor: Colors.white,
       body: Column(
         children: [
-          Padding(
-            padding: EdgeInsets.only(top: h*0.18,left: h*0.03,right: h*0.03,bottom: h*0.04),
-              child: Form(
-                key: _formkey,
-                child: TextFieldWidget(hintText: "Enter Patient CNIC..",
-                  type: TextInputType.phone,
-                  icon: Icons.numbers,
-                  controler: emailControler,
-                    validator: (value){
-                  if (value!.isEmpty) {
-                      return "Cannot be empty";
-                    }else{
-                    return null;
-                  }
-                }),
-              )
-          ),
-          RoundedBtnWidget( title: "Check",
-              onPress: (){
-            if(_formkey.currentState!.validate()){
-              AuthController.instance.checkPatientId(emailControler.text);
-            }else{
-              print("Something went wrong!!");
-            }
-          }),
           SizedBox(height: h*0.04,),
           Expanded(
             child: GridView.count(

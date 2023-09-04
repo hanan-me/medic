@@ -107,9 +107,6 @@ class AuthController extends GetxController{
         .then((DocumentSnapshot documentSnapshot) {
       if (documentSnapshot.exists) {
         if (documentSnapshot.get('Role') == "Doctor") {
-          print(FirebaseFirestore.instance
-              .collection('Users')
-              .doc(user!.uid));
           Get.offAll(()=>Doctor_Home());
         }else{
           if (documentSnapshot.get('role') == "Patient") {
@@ -172,31 +169,41 @@ class AuthController extends GetxController{
       );
     }
   }
-  void checkPatientId(String email){
-   try{
-     FirebaseFirestore.instance
-         .collection('Users')
-         .where("Email", isEqualTo: email)
-         .get().then((QuerySnapshot query){
-       query.docs.forEach((element) {
-         print(element.data());
-         print(element.id);
-       });
-     });
-   }catch(e){
-     Get.snackbar("Check", "message",
-         backgroundColor: Colors.redAccent,
-         snackPosition: SnackPosition.BOTTOM,
-         titleText: Text(
-           "Invalid Cnic Number",
-           style: TextStyle(
-               color: Colors.white
-           ),
-         ),
-         messageText: Text(
-           e.toString(),
-         )
-     );
-   }
+  Future<Map<String, dynamic>?> checkPatientId(String email) async {
+    try {
+      final QuerySnapshot query = await FirebaseFirestore.instance
+          .collection('Users')
+          .where("Email", isEqualTo: email)
+          .where("Role", isEqualTo: "Patient") // Add the "role" condition here
+          .get();
+
+      if (query.docs.isNotEmpty) {
+        final element = query.docs.first;
+        String patientId = element.id; // Store element.id as a string
+        Map<String, dynamic> patientData = element.data() as Map<String, dynamic>; // Get patient's data
+        print("Patient ID: $patientId");
+        print("Patient Data: $patientData");
+        return patientData;
+      } else {
+        return null; // Return null if no matching document is found
+      }
+    } catch (e) {
+      Get.snackbar(
+        "Check",
+        "message",
+        backgroundColor: Colors.redAccent,
+        snackPosition: SnackPosition.BOTTOM,
+        titleText: Text(
+          "Invalid Cnic Number",
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+        messageText: Text(
+          e.toString(),
+        ),
+      );
+      return null; // Return null in case of an error
+    }
   }
 }

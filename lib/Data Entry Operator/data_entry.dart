@@ -103,7 +103,7 @@ class _DataEntryOpState extends State<DataEntryOp> {
               margin: EdgeInsets.only(left: 20, right:20, top: 10),
               decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(30),
+                  borderRadius: BorderRadius.circular(18),
                   boxShadow: [
                     BoxShadow(
                       blurRadius: 10,
@@ -118,14 +118,14 @@ class _DataEntryOpState extends State<DataEntryOp> {
                   hintText: "Patient Id",
                   prefixIcon: Icon(Icons.numbers, color:Colors.teal),
                   focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30),
+                      borderRadius: BorderRadius.circular(18),
                       borderSide: BorderSide(
                         color: Colors.white,
                         width: 1.0,
                       )
                   ),
                   enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30),
+                      borderRadius: BorderRadius.circular(18),
                       borderSide: BorderSide(
                           color: Colors.white,
                           width: 1.0
@@ -138,7 +138,7 @@ class _DataEntryOpState extends State<DataEntryOp> {
               margin: EdgeInsets.only(left: 20, right:20, top: 10),
               decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(30),
+                  borderRadius: BorderRadius.circular(18),
                   boxShadow: [
                     BoxShadow(
                       blurRadius: 10,
@@ -153,14 +153,14 @@ class _DataEntryOpState extends State<DataEntryOp> {
                   hintText: "Report Name",
                   prefixIcon: Icon(Icons.text_fields, color:Colors.teal),
                   focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30),
+                      borderRadius: BorderRadius.circular(18),
                       borderSide: BorderSide(
                         color: Colors.white,
                         width: 1.0,
                       )
                   ),
                   enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30),
+                      borderRadius: BorderRadius.circular(18),
                       borderSide: BorderSide(
                           color: Colors.white,
                           width: 1.0
@@ -180,7 +180,7 @@ class _DataEntryOpState extends State<DataEntryOp> {
                     width: w*0.45,
                     height: h*0.06,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
+                        borderRadius: BorderRadius.circular(18),
                         boxShadow: [
                           BoxShadow(
                             blurRadius: 10,

@@ -79,6 +79,7 @@ class _Phone_VerficationState extends State<Phone_Verfication> {
                         ),
                         child: TextField(
                           controller: phone,
+                          keyboardType: TextInputType.phone,
                           decoration: InputDecoration(
                             hintText: "Phone",
                             prefixIcon: Icon(Icons.phone, color: Colors.teal),

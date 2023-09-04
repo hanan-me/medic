@@ -103,7 +103,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                   width: w * 0.4,
                   height: h * 0.055,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(18),
                       image: DecorationImage(
                         image: AssetImage(
                             "img/btn.jpg"

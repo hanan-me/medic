@@ -97,7 +97,7 @@ class RoundedBtnWidget extends StatelessWidget {
           width: w*0.45,
           height: h*0.06,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
+              borderRadius: BorderRadius.circular(18),
               boxShadow: [
                 BoxShadow(
                   blurRadius: 10,
@@ -153,7 +153,7 @@ class ProfileManage extends StatelessWidget {
         width: 40,
         height: 40,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30),
+          borderRadius: BorderRadius.circular(18),
           color: Colors.tealAccent.withOpacity(0.1),
         ),
         child: Icon(icon, color: Colors.teal),

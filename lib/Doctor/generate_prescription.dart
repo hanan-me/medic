@@ -105,7 +105,7 @@ class _Generate_PrescriptionState extends State<Generate_Prescription> {
                           width: w * 0.4,
                           height: h * 0.055,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
+                              borderRadius: BorderRadius.circular(18),
                               image: DecorationImage(
                                 image: AssetImage(
                                     "img/btn.jpg"
@@ -137,7 +137,7 @@ class _Generate_PrescriptionState extends State<Generate_Prescription> {
                           width: w * 0.4,
                           height: h * 0.055,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
+                              borderRadius: BorderRadius.circular(18),
                               image: DecorationImage(
                                 image: AssetImage(
                                     "img/btn.jpg"

@@ -79,7 +79,7 @@ class _GetStartedState extends State<GetStarted> {
                 width: w*0.5,
                 height: h*0.06,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
+                    borderRadius: BorderRadius.circular(18),
                     image: DecorationImage(
                       image: AssetImage(
                           "img/btn.jpg"
@@ -110,7 +110,7 @@ class _GetStartedState extends State<GetStarted> {
                 height: h*0.06,
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.teal),
-                    borderRadius: BorderRadius.circular(30),
+                    borderRadius: BorderRadius.circular(18),
                 ),
                 child: Center(
                   child: Text(

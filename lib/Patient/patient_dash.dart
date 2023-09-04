@@ -61,7 +61,7 @@ class _Patient_DashboardState extends State<Patient_Dashboard> {
                     width: w*0.45,
                     height: h*0.06,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
+                        borderRadius: BorderRadius.circular(18),
                         boxShadow: [
                           BoxShadow(
                             blurRadius: 10,

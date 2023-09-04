@@ -74,7 +74,7 @@ class _Get_OtpState extends State<Get_Otp> {
                 width: w * 0.4,
                 height: h * 0.055,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
+                    borderRadius: BorderRadius.circular(18),
                     image: DecorationImage(
                       image: AssetImage(
                           "img/btn.jpg"

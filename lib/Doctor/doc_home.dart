@@ -1,7 +1,10 @@
+import 'package:bootstrap_icons/bootstrap_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:medic/Auths/auth_controller.dart';
+import 'package:medic/Doctor/check_patient.dart';
 import 'package:medic/Doctor/doc_dash.dart';
 import 'package:medic/Doctor/generate_prescription.dart';
 import 'package:medic/Doctor/generate_report.dart';
@@ -27,6 +30,19 @@ class _Doctor_HomeState extends State<Doctor_Home> {
         title: Text("Profile"),
         actions: [IconButton(onPressed:(){AuthController.instance.logOut();},icon: const Icon(Icons.logout_outlined, color: Colors.white))],
       ),
+      bottomNavigationBar: GNav(
+        gap: 4,
+        padding: EdgeInsets.all(20),
+        backgroundColor: Colors.teal,
+        color: Colors.white54,
+        activeColor: Colors.white,
+        tabBackgroundColor: Colors.white24,
+        tabs: [
+        GButton(icon: Icons.home,text: "Home",onPressed: (){},),
+        GButton(icon: Icons.heart_broken,text: "Diagnose",onPressed: (){Get.to(()=>CheckPatient());},),
+        GButton(icon: Icons.view_module,text: "Patient History",onPressed: (){},),
+        GButton(icon: Icons.person,text: "Profile",onPressed: (){Get.to(()=>DoctorDashboard());},),
+      ],),
       resizeToAvoidBottomInset: false,
       // backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -81,7 +97,7 @@ class _Doctor_HomeState extends State<Doctor_Home> {
                   SizedBox(width: h*0.013,),
                   ButtonWidget(title: "Profile", onPress: () { Get.to(()=>GenerateReport()); },),
                   SizedBox(width: h*0.005,),
-                  ButtonWidget(title: "Diagnose", onPress: () { Get.to(()=>GenerateReport()); },),
+                  ButtonWidget(title: "Diagnose", onPress: () { Get.to(()=>CheckPatient()); },),
                   SizedBox(width: h*0.005,),
                   ButtonWidget(title: "Patient History", onPress: () {  },),
                 ]
