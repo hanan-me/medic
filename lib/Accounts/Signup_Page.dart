@@ -27,7 +27,12 @@ class _SignupPageState extends State<SignupPage> {
     {"title": "Lab Scientist", "value": "Lab Scientist"},
     {"title": "Data Entry Operator", "value": "Data Entry Operator"},
   ];
+  List gender = [
+    {"title": "Male", "value": "Male"},
+    {"title": "Female", "value": "Female"},
+  ];
   String defaultValue = "";
+  String gtValue = "";
   DateTime dateTime = DateTime.now();
   void _showDatePicker(){
     showDatePicker(context: context,
@@ -50,10 +55,6 @@ class _SignupPageState extends State<SignupPage> {
   @override
   Widget build(BuildContext context) {
 
-    List images = [
-      "google.png",
-      "facebook.png"
-    ];
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -147,7 +148,7 @@ class _SignupPageState extends State<SignupPage> {
                     SizedBox(height: h * 0.01,),
                     Container(
                       padding: EdgeInsets.only(left: 40),
-                      height: 63,
+                      height: 58,
                       decoration:  BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(18),
@@ -174,7 +175,7 @@ class _SignupPageState extends State<SignupPage> {
                           ),
                           Expanded(
                             child: MaterialButton(
-                                padding: EdgeInsets.only(left: h*0.09),
+                                padding: EdgeInsets.only(left: h*0.12),
                                 onPressed: _showDatePicker,
                                 child: Icon(Icons.calendar_month,color: Colors.teal,)
                             ),
@@ -183,8 +184,49 @@ class _SignupPageState extends State<SignupPage> {
                       ),
                     ),
                     SizedBox(height: h * 0.01,),
-                    TextFieldWidget(hintText: "Gender",icon: Icons.person,
-                        validator: (value){}),
+                    Container(
+                      height: h*0.07,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(18),
+                          boxShadow: [
+                            BoxShadow(
+                              blurRadius: 10,
+                              spreadRadius: 7,
+                              offset: Offset(1, 1),
+                              color: Colors.grey.withOpacity(0.4),
+                            )
+                          ]
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.only(left: w*0.07,right: w*0.03,),
+                        child: DropdownButtonHideUnderline(
+                          child: DropdownButton<String>(
+                              isDense: true,
+                              value: gtValue,
+                              isExpanded: true,
+                              menuMaxHeight: 350,
+                              items: [
+                                const DropdownMenuItem(
+                                    child: Text(
+                                      "Gender",
+                                      style: TextStyle(color: Colors.black54),
+                                    ),
+                                    value: ""),
+                                ...gender.map<DropdownMenuItem<String>>((data) {
+                                  return DropdownMenuItem(
+                                      child: Text(data['title']), value: data['value']);
+                                }).toList(),
+                              ],
+                              onChanged: (value) {
+                                // print("selected Value $value");
+                                setState(() {
+                                  gtValue = value!;
+                                });
+                              }),
+                        ),
+                      ),
+                    ),
                     SizedBox(height: h * 0.01,),
                     TextFieldWidget(hintText: "CNIC",icon: Icons.numbers_outlined,
                       controler: cnicController,validator: (value){}),
@@ -262,7 +304,7 @@ class _SignupPageState extends State<SignupPage> {
                         recognizer: TapGestureRecognizer()
                           ..onTap = () => Get.to(() => LoginPage())
                     )),
-                    SizedBox(height: w * 0.03),
+                    SizedBox(height: w * 0.05),
                     Padding(padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom)),
                   ],
                 ),
@@ -280,12 +322,12 @@ class TextFieldWidget extends StatelessWidget {
     super.key, this.icon, this.hintText, this.controler, this.bol = false, this.type, required String? Function(dynamic value) validator,
 
   });
-
   final icon;
   final type;
   final hintText;
   final controler;
   final bool bol;
+
   @override
   Widget build(BuildContext context) {
     return Container(

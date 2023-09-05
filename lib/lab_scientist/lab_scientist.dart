@@ -4,6 +4,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:medic/Accounts/Signup_Page.dart';
 
 import '../Accounts/Login_Page.dart';
 class Lab_Scientist extends StatefulWidget {
@@ -101,41 +102,7 @@ class _Lab_ScientistState extends State<Lab_Scientist> {
             Divider(
               color: Colors.grey,
             ),
-            Container(
-                margin: EdgeInsets.only(left: 20, right:20, top: 10),
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(18),
-                    boxShadow: [
-                      BoxShadow(
-                        blurRadius: 10,
-                        spreadRadius: 7,
-                        offset: Offset(1, 1),
-                        color:Colors.grey.withOpacity(0.4),
-                      )
-                    ]
-                ),
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: "Patient Id",
-                    prefixIcon: Icon(Icons.numbers, color:Colors.teal),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(18),
-                        borderSide: BorderSide(
-                          color: Colors.white,
-                          width: 1.0,
-                        )
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(18),
-                        borderSide: BorderSide(
-                            color: Colors.white,
-                            width: 1.0
-                        )
-                    ),
-                  ),
-                )
-            ),
+            // TextFieldWidget(hintText: "Report Name",icon: Icons.text_fields, validator: (value) {  },),
             Container(
                 margin: EdgeInsets.only(left: 20, right:20, top: 10),
                 decoration: BoxDecoration(

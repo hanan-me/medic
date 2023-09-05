@@ -28,8 +28,8 @@ class _Generate_PrescriptionState extends State<Generate_Prescription> {
         backgroundColor: Colors.teal,
         leading: IconButton(onPressed:()=> Get.back(),icon: const Icon(Icons.arrow_back, color: Colors.white)),
         title: Text("Prescription"),
-        actions: [IconButton(onPressed:()=> Get.to(()=> DoctorDashboard()),
-            icon: const Icon(Icons.logout_outlined, color: Colors.white))],
+        // actions: [IconButton(onPressed:()=> Get.to(()=> DoctorDashboard()),
+        //     icon: const Icon(Icons.logout_outlined, color: Colors.white))],
       ),
       body: SafeArea(
         child: SingleChildScrollView(

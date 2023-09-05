@@ -200,7 +200,7 @@ class _LoginPageState extends State<LoginPage> {
                           width: w*0.35,
                           height: h*0.06,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(25),
+                              borderRadius: BorderRadius.circular(18),
                               image: DecorationImage(
                                 image: AssetImage(
                                     "img/btn.jpg"
@@ -238,7 +238,7 @@ class _LoginPageState extends State<LoginPage> {
                           )
                         ]
                     )),
-                    RoundedBtnWidget(title: "Logout",onPress: (){AuthController.instance.logOut();},),
+                    // RoundedBtnWidget(title: "Logout",onPress: (){AuthController.instance.logOut();},),
                     Padding(padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom)),
                   ],
                 ),

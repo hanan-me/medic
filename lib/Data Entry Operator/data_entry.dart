@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 import '../Accounts/Login_Page.dart';
+import '../Auths/auth_controller.dart';
 
 class DataEntryOp extends StatefulWidget {
   const DataEntryOp({super.key});
@@ -54,7 +55,7 @@ class _DataEntryOpState extends State<DataEntryOp> {
         backgroundColor: Colors.teal,
         leading: IconButton(onPressed:()=> Get.back(),icon: const Icon(Icons.arrow_back, color: Colors.white)),
         title: Text("Profile"),
-        actions: [IconButton(onPressed:()=> Get.to(()=> LoginPage()),
+        actions: [IconButton(onPressed:(){AuthController.instance.logOut();},
             icon: const Icon(Icons.logout_outlined, color: Colors.white))],
       ),
       resizeToAvoidBottomInset: false,

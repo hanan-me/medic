@@ -3,18 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:medic/Doctor/generate_report.dart';
+import 'package:medic/lab_scientist/lab_scientist.dart';
 
 import '../Accounts/Signup_Page.dart';
 import '../Auths/auth_controller.dart';
-import 'doc_dash.dart';
-class CheckPatient extends StatefulWidget {
-  const CheckPatient({super.key});
+import '../Doctor/doc_dash.dart';
+
+class LabCheckPatient extends StatefulWidget {
+  const LabCheckPatient({super.key});
 
   @override
-  State<CheckPatient> createState() => _CheckPatientState();
+  State<LabCheckPatient> createState() => _LabCheckPatientState();
 }
 
-class _CheckPatientState extends State<CheckPatient> {
+class _LabCheckPatientState extends State<LabCheckPatient> {
   final cnicController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
@@ -32,7 +34,7 @@ class _CheckPatientState extends State<CheckPatient> {
         backgroundColor: Colors.teal,
         leading: IconButton(onPressed:()=> Get.back(),icon: const Icon(Icons.arrow_back, color: Colors.white)),
         title: Text("Search Patient"),
-        // actions: [IconButton(onPressed:()=> Get.to(()=> LoginPage()),icon: const Icon(Icons.logout_outlined, color: Colors.white))],
+        actions: [IconButton(onPressed:(){AuthController.instance.logOut();},icon: const Icon(Icons.logout_outlined, color: Colors.white))],
       ),
       resizeToAvoidBottomInset: false,
       // backgroundColor: Colors.white,
@@ -40,11 +42,11 @@ class _CheckPatientState extends State<CheckPatient> {
         children: [
           SizedBox(height: h*0.1,),
           Text("Search Patient By CNIC",
-          style: TextStyle(
-            fontSize: 30,
-            fontWeight: FontWeight.bold,
-            color: Colors.teal,
-          ),
+            style: TextStyle(
+              fontSize: 30,
+              fontWeight: FontWeight.bold,
+              color: Colors.teal,
+            ),
           ),
           Padding(
               padding: EdgeInsets.only(top: h*0.08,left: h*0.03,right: h*0.03,bottom: h*0.04),
@@ -67,7 +69,7 @@ class _CheckPatientState extends State<CheckPatient> {
               onPress: () async{
                 if (_formKey.currentState!.validate()) {
                   String patientId =
-                      await AuthController.instance.checkPatientId(cnicController.text);
+                  await AuthController.instance.checkPatientId(cnicController.text);
 
                   if (patientId != null) {
                     // Assuming you have a reference to your Firestore collection
@@ -148,9 +150,7 @@ class _CheckPatientState extends State<CheckPatient> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    RoundedBtnWidget(title: "History",onPress: (){}),
-                    SizedBox(width: h*0.01,),
-                    RoundedBtnWidget(title: "Generate Report",onPress: (){Get.to(()=>GenerateReport());}),
+                    RoundedBtnWidget(title: "Create Report",onPress: (){Get.to(()=>Lab_Scientist());}),
                   ],
                 )
               ],

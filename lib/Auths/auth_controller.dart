@@ -8,6 +8,7 @@ import 'package:medic/Data%20Entry%20Operator/data_entry.dart';
 import 'package:medic/Starter/SplashScreen.dart';
 
 import 'package:medic/Doctor/doc_home.dart';
+import 'package:medic/lab_scientist/lab_check_p.dart';
 import 'package:medic/lab_scientist/lab_scientist.dart';
 
 import '../Accounts/Login_Page.dart';
@@ -18,6 +19,7 @@ class AuthController extends GetxController{
   //AuthController.instance..
   static AuthController instance = Get.find();
   var id = "";
+  List<String> pData = [];
   //email, password, name ....
   final _users = Rxn<User>();
   late Rx<User?> _user;
@@ -41,32 +43,71 @@ class AuthController extends GetxController{
     }
   }
 
-  void register(String name, String num,String cnic,String email, String password,String role) async{
-    try{
-      await auth.createUserWithEmailAndPassword(email: email, password: password)
-      .then((value) => {postDetailsToFirestore(name,num,cnic,email,role)});
-    }
-    catch(e){
-      Get.snackbar("About User", "message",
-      backgroundColor: Colors.redAccent,
-      snackPosition: SnackPosition.BOTTOM,
+  void register(String name, String num, String cnic, String email, String password, String role) async {
+    try {
+      await auth.createUserWithEmailAndPassword(email: email, password: password).then((value) {
+        postDetailsToFirestore(name, num, cnic, email, role);
+      });
+    } catch (e) {
+      Get.snackbar(
+        "About User",
+        "message",
+        backgroundColor: Colors.redAccent,
+        snackPosition: SnackPosition.BOTTOM,
         titleText: Text(
           "Account creation failed",
           style: TextStyle(
-            color: Colors.white
+            color: Colors.white,
           ),
         ),
         messageText: Text(
           e.toString(),
-        )
+        ),
       );
     }
   }
-  postDetailsToFirestore(String name, String num,String cnic,String email,String role) async {
+
+  postDetailsToFirestore(String name, String num, String cnic, String email, String role) async {
     var user = auth.currentUser;
-    CollectionReference ref = firebaseFirestore.collection('Users');
-    ref.doc(user!.uid).set({'Role':role,'Email': email,'CNIC':cnic,'Phone Number': num,'Name': name});
-    Get.offAll(()=>LoginPage());
+    CollectionReference userRef = firebaseFirestore.collection('Users');
+
+    try {
+      // Create a document in the "Users" collection for the user
+      await userRef.doc(user!.uid).set({
+        'Role': role,
+        'Email': email,
+        'CNIC': cnic,
+        'Phone Number': num,
+        'Name': name,
+      });
+
+      // Create a subcollection named "Reports" for the user
+      CollectionReference reportsRef = userRef.doc(user.uid).collection('Reports');
+
+      // Add a document to the "Reports" subcollection
+      await reportsRef.add({
+        'field1': 'value1',
+        'field2': 'value2',
+      });
+
+      Get.offAll(() => LoginPage());
+    } catch (error) {
+      Get.snackbar(
+        "Error",
+        "An error occurred while saving user data",
+        backgroundColor: Colors.redAccent,
+        snackPosition: SnackPosition.BOTTOM,
+        titleText: Text(
+          "Error",
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+        messageText: Text(
+          error.toString(),
+        ),
+      );
+    }
   }
   getUserid(){
     authStateChanges = auth.authStateChanges();
@@ -109,13 +150,13 @@ class AuthController extends GetxController{
         if (documentSnapshot.get('Role') == "Doctor") {
           Get.offAll(()=>Doctor_Home());
         }else{
-          if (documentSnapshot.get('role') == "Patient") {
+          if (documentSnapshot.get('Role') == "Patient") {
             Get.offAll(()=>Patient_Dashboard());
           }else{
-            if (documentSnapshot.get('role') == "Lab Scientist") {
-              Get.offAll(()=>Lab_Scientist());
+            if (documentSnapshot.get('Role') == "Lab Scientist") {
+              Get.offAll(()=>LabCheckPatient());
             }else{
-              if (documentSnapshot.get('role') == "Data Entry Operator") {
+              if (documentSnapshot.get('Role') == "Data Entry Operator") {
                 Get.offAll(()=>DataEntryOp());
               }else{
                 Get.snackbar("About Login", "message",
@@ -169,24 +210,20 @@ class AuthController extends GetxController{
       );
     }
   }
-  Future<Map<String, dynamic>?> checkPatientId(String email) async {
+
+  Future<String> checkPatientId(String cnic) async {
+    String patientId="null";
     try {
-      final QuerySnapshot query = await FirebaseFirestore.instance
+      QuerySnapshot query = await FirebaseFirestore.instance
           .collection('Users')
-          .where("Email", isEqualTo: email)
+          .where("CNIC", isEqualTo: cnic)
           .where("Role", isEqualTo: "Patient") // Add the "role" condition here
           .get();
-
-      if (query.docs.isNotEmpty) {
-        final element = query.docs.first;
-        String patientId = element.id; // Store element.id as a string
-        Map<String, dynamic> patientData = element.data() as Map<String, dynamic>; // Get patient's data
-        print("Patient ID: $patientId");
-        print("Patient Data: $patientData");
-        return patientData;
-      } else {
-        return null; // Return null if no matching document is found
-      }
+      query.docs.forEach((element) {
+        // print(element.data());
+        patientId = element.id; // Store element.id as a string
+        print(patientId);
+      });
     } catch (e) {
       Get.snackbar(
         "Check",
@@ -203,7 +240,10 @@ class AuthController extends GetxController{
           e.toString(),
         ),
       );
-      return null; // Return null in case of an error
     }
+    return patientId;
+  }
+  void ViewData(String cnic){
+    Text("Cnic ${cnic}");
   }
 }
