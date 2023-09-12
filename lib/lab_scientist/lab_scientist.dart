@@ -1,12 +1,14 @@
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:medic/Accounts/Signup_Page.dart';
 
 import '../Accounts/Login_Page.dart';
+import '../Auths/auth_controller.dart';
 class Lab_Scientist extends StatefulWidget {
   const Lab_Scientist({super.key});
 
@@ -15,37 +17,47 @@ class Lab_Scientist extends StatefulWidget {
 }
 
 class _Lab_ScientistState extends State<Lab_Scientist> {
+  bool upload = false;
+  double progress = 0.0;
+  String urlDownload = "";
+  UploadTask? uploadTask;
+  DateTime dateTime = DateTime.now();
+  PlatformFile? pickedFile;
+  List<PlatformFile>? _files;
+  final type = TextEditingController();
+  Future selectFile() async{
+    final result = await FilePicker.platform.pickFiles();
+    if(result == null) return;
+    setState(() {
+      pickedFile = result.files.first;
+    });
+  }
+  Future uploadFile() async{
+    final path = 'Lab_Tests/${pickedFile!.name}';
+    final file = File(pickedFile!.path!);
+
+    final ref = FirebaseStorage.instance.ref().child(path);
+    print('Reference :  ${ref.fullPath}');
+    uploadTask = ref.putFile(file);
+    uploadTask!.snapshotEvents.listen((TaskSnapshot snapshot) {
+      setState(() {
+        progress = snapshot.bytesTransferred / snapshot.totalBytes;
+      });
+    });
+    upload = true;
+    final snapshot = await uploadTask!.whenComplete(() {});
+    urlDownload = await snapshot.ref.getDownloadURL();
+    print('Download Link: $urlDownload');
+    setState(() {
+      uploadTask = null;
+      pickedFile = null;
+      upload = false;
+    });
+
+    AuthController.instance.addLabTestDes(type.text, urlDownload,dateTime);
+  }
   @override
   Widget build(BuildContext context) {
-    FilePickerResult? result;
-    String? _fileName;
-    PlatformFile?pickedfile;
-    bool isLoading = false;
-    File?fileToDisplay;
-
-    void pickFile() async{
-      try{
-        setState(() {
-          isLoading = true;
-        });
-        result = await FilePicker.platform.pickFiles(
-          type: FileType.any,
-          allowMultiple: false,
-        );
-        if(result != null){
-          _fileName = result!.files.first.name;
-          pickedfile = result!.files.first;
-          fileToDisplay = File(pickedfile!.path.toString());
-          print("File Name $_fileName");
-        }
-        setState(() {
-          isLoading = false;
-        });
-
-      }catch(e){
-        print(e);
-      }
-    };
 
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
@@ -54,7 +66,7 @@ class _Lab_ScientistState extends State<Lab_Scientist> {
         backgroundColor: Colors.teal,
         leading: IconButton(onPressed:()=> Get.back(),icon: const Icon(Icons.arrow_back, color: Colors.white)),
         title: Text("Lab Scientist"),
-        actions: [IconButton(onPressed:()=> Get.to(()=> LoginPage()),
+        actions: [IconButton(onPressed:(){AuthController.instance.logOut();},
             icon: const Icon(Icons.logout_outlined, color: Colors.white))],
       ),
       resizeToAvoidBottomInset: false,
@@ -118,6 +130,7 @@ class _Lab_ScientistState extends State<Lab_Scientist> {
                     ]
                 ),
                 child: TextField(
+                  controller: type,
                   decoration: InputDecoration(
                     hintText: "Report Name",
                     prefixIcon: Icon(Icons.text_fields, color:Colors.teal),
@@ -167,20 +180,48 @@ class _Lab_ScientistState extends State<Lab_Scientist> {
                             ],
                           )
                       ),
-                      child: isLoading?CircularProgressIndicator():TextButton(onPressed: (){pickFile();}, child: Text("Upload Tests",
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.white,
+                      child: ElevatedButton(
+                        onPressed: selectFile,
+                        child: Text('Pick a File'),
                       ),
-                      )),
                     ),
                   ),
-                  if(pickedfile != null)
-                    SizedBox(child: Image.file(fileToDisplay!))
+                  if(pickedFile != null)
+                    Center(child: Text("File name: ${pickedFile!.name}")),
+                    if(pickedFile != null)
+                      Center(
+                        child :ElevatedButton(
+                          onPressed: uploadFile,
+                          child: Text('Upload File'),
+                        ),
+                      ),
+                  if (upload) SizedBox(
+                    height: 40,
+                    child: Stack(
+                      fit:StackFit.expand,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: LinearProgressIndicator(
+                            value: progress,
+                            backgroundColor: Colors.grey,
+                            color: Colors.green,
+                          ),
+                        ),
+                        Center(
+                          child: Text(
+                            '${(100 * progress).roundToDouble()}%',
+                            style: TextStyle(color:Colors.white),
+                          ),
+                        )
+                      ],
+                    ),
+                  )
                 ],
               ),
             ),
             Padding(padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom)),
+
           ],
         ),
       ),

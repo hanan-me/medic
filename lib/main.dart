@@ -24,7 +24,12 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       // home: new LoginScreen(),
       debugShowCheckedModeBanner: false,
-      home: CircularProgressIndicator(),
+      home:
+      SizedBox(
+        height: 50,
+        width: 50,
+        child:CircularProgressIndicator(),
+      ),
       theme: ThemeData(primarySwatch: Colors.teal),
     );//MaterialApp
   }

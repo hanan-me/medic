@@ -64,7 +64,7 @@ class _Doctor_HomeState extends State<Doctor_Home> {
             SizedBox(height: h*0.028,),
             Padding(
               padding: EdgeInsets.only(left: h*0.03,),
-              child: Text("Doctor Name..",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold,color: Colors.teal),),
+              child: Text("Haider Ali",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold,color: Colors.teal),),
             ),
             SizedBox(height: h*0.01,),
             Padding(
@@ -91,18 +91,18 @@ class _Doctor_HomeState extends State<Doctor_Home> {
               )
             ),
             SizedBox(height: w*0.2,),
-            Center(
-              child: Row(
-                children:[
-                  SizedBox(width: h*0.013,),
-                  ButtonWidget(title: "Profile", onPress: () { Get.to(()=>GenerateReport()); },),
-                  SizedBox(width: h*0.005,),
-                  ButtonWidget(title: "Diagnose", onPress: () { Get.to(()=>CheckPatient()); },),
-                  SizedBox(width: h*0.005,),
-                  ButtonWidget(title: "Patient History", onPress: () {  },),
-                ]
-              ),
-            ),
+            // Center(
+            //   child: Row(
+            //     children:[
+            //       SizedBox(width: h*0.013,),
+            //       ButtonWidget(title: "Profile", onPress: () { Get.to(()=>GenerateReport()); },),
+            //       SizedBox(width: h*0.005,),
+            //       ButtonWidget(title: "Diagnose", onPress: () { Get.to(()=>CheckPatient()); },),
+            //       SizedBox(width: h*0.005,),
+            //       ButtonWidget(title: "Patient History", onPress: () {  },),
+            //     ]
+            //   ),
+            // ),
             SizedBox(height: w*0.02,),
           ],
         ),

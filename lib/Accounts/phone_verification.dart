@@ -1,5 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:lottie/lottie.dart';
+import 'package:medic/Accounts/get_otp.dart';
 
 import 'Signup_Page.dart';
 class Phone_Verfication extends StatefulWidget {
@@ -30,14 +34,12 @@ class _Phone_VerficationState extends State<Phone_Verfication> {
           children: [
             Container(
               width: w,
-              height: h*0.3,
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage(
-                          "img/upper.jpg"
-                      ),
-                      fit: BoxFit.cover
-                  )
+              height: h*0.45,
+              child: Lottie.asset(
+                'animations/animation_lm652clf.json',
+                repeat: true,
+                reverse: true,
+                fit: BoxFit.cover,
               ),
             ),
             Padding(
@@ -56,7 +58,7 @@ class _Phone_VerficationState extends State<Phone_Verfication> {
                       ),
                     ),
                     Text(
-                      "Sign into your account",
+                      "Enter the phone number to recieve OTP",
                       style: TextStyle(
                         fontSize: 16,
                         color: Colors.grey[500],
@@ -67,7 +69,7 @@ class _Phone_VerficationState extends State<Phone_Verfication> {
                     Container(
                         decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius: BorderRadius.circular(30),
+                            borderRadius: BorderRadius.circular(18),
                             boxShadow: [
                               BoxShadow(
                                 blurRadius: 10,
@@ -82,16 +84,16 @@ class _Phone_VerficationState extends State<Phone_Verfication> {
                           keyboardType: TextInputType.phone,
                           decoration: InputDecoration(
                             hintText: "Phone",
-                            prefixIcon: Icon(Icons.phone, color: Colors.teal),
+                            prefixIcon: Icon(Icons.phone_android, color: Colors.teal),
                             focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30),
+                                borderRadius: BorderRadius.circular(18),
                                 borderSide: BorderSide(
                                   color: Colors.white,
                                   width: 1.0,
                                 )
                             ),
                             enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30),
+                                borderRadius: BorderRadius.circular(18),
                                 borderSide: BorderSide(
                                     color: Colors.white,
                                     width: 1.0
@@ -126,12 +128,13 @@ class _Phone_VerficationState extends State<Phone_Verfication> {
                           },
                           codeAutoRetrievalTimeout: (String verificationId) {},
                         );
+                        Get.to(()=>Get_Otp());
                       },
                       child: Container(
                           width: w*0.35,
                           height: h*0.06,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(25),
+                              borderRadius: BorderRadius.circular(18),
                               image: DecorationImage(
                                 image: AssetImage(
                                     "img/btn.jpg"

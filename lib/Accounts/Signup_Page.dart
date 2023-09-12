@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medic/Auths/auth_controller.dart';
+import 'package:intl/intl.dart';
 
 import 'Login_Page.dart';
 
@@ -33,7 +34,9 @@ class _SignupPageState extends State<SignupPage> {
   ];
   String defaultValue = "";
   String gtValue = "";
+  String dob = "yyyy-MM_dd";
   DateTime dateTime = DateTime.now();
+  // String formattedDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
   void _showDatePicker(){
     showDatePicker(context: context,
         initialDate: DateTime.now(),
@@ -42,6 +45,7 @@ class _SignupPageState extends State<SignupPage> {
     ).then((value){
       setState(() {
         dateTime = value!;
+        dob = '${dateTime.year}-${dateTime.month}-${dateTime.day}';
       });
     });
   }
@@ -147,7 +151,7 @@ class _SignupPageState extends State<SignupPage> {
                         validator: (value){}),
                     SizedBox(height: h * 0.01,),
                     Container(
-                      padding: EdgeInsets.only(left: 40),
+                      padding: EdgeInsets.only(left: 30),
                       height: 58,
                       decoration:  BoxDecoration(
                           color: Colors.white,
@@ -166,7 +170,7 @@ class _SignupPageState extends State<SignupPage> {
                           Expanded(
                               child: Container(
                                 child: Text(
-                                  '${dateTime.month}-${dateTime.day}-${dateTime.year}',
+                                  dob,
                                   style: TextStyle(
                                     fontSize: 15,
                                   ),
@@ -229,7 +233,7 @@ class _SignupPageState extends State<SignupPage> {
                     ),
                     SizedBox(height: h * 0.01,),
                     TextFieldWidget(hintText: "CNIC",icon: Icons.numbers_outlined,
-                      controler: cnicController,validator: (value){}),
+                      controler: cnicController,type: TextInputType.phone,validator: (value){}),
                     SizedBox(height: h * 0.01,),
                     TextFieldWidget(hintText: "Email",icon: Icons.email_outlined,
                         controler: emailController,validator: (value){
@@ -268,7 +272,7 @@ class _SignupPageState extends State<SignupPage> {
                             cnicController.text.trim(),
                             emailController.text.trim(),
                             passwordController.text.trim(),
-                            defaultValue);
+                            defaultValue,gtValue,dob);
                       },
                       child: Container(
                           width: w * 0.4,
@@ -286,7 +290,7 @@ class _SignupPageState extends State<SignupPage> {
                             child: Text(
                               "Sign up",
                               style: TextStyle(
-                                fontSize: 30,
+                                fontSize: 20,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white,
                               ),
@@ -319,7 +323,7 @@ class _SignupPageState extends State<SignupPage> {
 
 class TextFieldWidget extends StatelessWidget {
   const TextFieldWidget({
-    super.key, this.icon, this.hintText, this.controler, this.bol = false, this.type, required String? Function(dynamic value) validator,
+    super.key, this.icon, this.hintText, this.controler, this.bol = false, this.type, required String? Function(dynamic value) validator, this.formKey,
 
   });
   final icon;
@@ -327,6 +331,7 @@ class TextFieldWidget extends StatelessWidget {
   final hintText;
   final controler;
   final bool bol;
+  final formKey;
 
   @override
   Widget build(BuildContext context) {
@@ -343,26 +348,29 @@ class TextFieldWidget extends StatelessWidget {
               )
             ]
         ),
-        child: TextFormField(
-          controller: controler,
-          keyboardType: type,
-          obscureText: bol,
-          decoration: InputDecoration(
-            hintText: hintText,
-            prefixIcon: Icon(icon, color: Colors.teal),
-            focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(18),
-                borderSide: BorderSide(
-                  color: Colors.white,
-                  width: 1.0,
-                )
-            ),
-            enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(18),
-                borderSide: BorderSide(
+        child: Form(
+          key: formKey,
+          child: TextFormField(
+            controller: controler,
+            keyboardType: type,
+            obscureText: bol,
+            decoration: InputDecoration(
+              hintText: hintText,
+              prefixIcon: Icon(icon, color: Colors.teal),
+              focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(18),
+                  borderSide: BorderSide(
                     color: Colors.white,
-                    width: 1.0
-                )
+                    width: 1.0,
+                  )
+              ),
+              enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(18),
+                  borderSide: BorderSide(
+                      color: Colors.white,
+                      width: 1.0
+                  )
+              ),
             ),
           ),
         )

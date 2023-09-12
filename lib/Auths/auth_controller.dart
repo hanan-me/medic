@@ -8,6 +8,7 @@ import 'package:medic/Data%20Entry%20Operator/data_entry.dart';
 import 'package:medic/Starter/SplashScreen.dart';
 
 import 'package:medic/Doctor/doc_home.dart';
+import 'package:medic/file_pick.dart';
 import 'package:medic/lab_scientist/lab_check_p.dart';
 import 'package:medic/lab_scientist/lab_scientist.dart';
 
@@ -19,6 +20,7 @@ class AuthController extends GetxController{
   //AuthController.instance..
   static AuthController instance = Get.find();
   var id = "";
+  String patientId="";
   List<String> pData = [];
   //email, password, name ....
   final _users = Rxn<User>();
@@ -43,10 +45,10 @@ class AuthController extends GetxController{
     }
   }
 
-  void register(String name, String num, String cnic, String email, String password, String role) async {
+  void register(String name, String num, String cnic, String email, String password, String role, String g, String dob) async {
     try {
       await auth.createUserWithEmailAndPassword(email: email, password: password).then((value) {
-        postDetailsToFirestore(name, num, cnic, email, role);
+        postDetailsToFirestore(name, num, cnic, email, role,g,dob);
       });
     } catch (e) {
       Get.snackbar(
@@ -67,7 +69,7 @@ class AuthController extends GetxController{
     }
   }
 
-  postDetailsToFirestore(String name, String num, String cnic, String email, String role) async {
+  postDetailsToFirestore(String name, String num, String cnic, String email, String role, String g, String dob) async {
     var user = auth.currentUser;
     CollectionReference userRef = firebaseFirestore.collection('Users');
 
@@ -79,6 +81,8 @@ class AuthController extends GetxController{
         'CNIC': cnic,
         'Phone Number': num,
         'Name': name,
+        'Gender': g,
+        'Date Of Birth': dob,
       });
 
       // Create a subcollection named "Reports" for the user
@@ -108,14 +112,6 @@ class AuthController extends GetxController{
         ),
       );
     }
-  }
-  getUserid(){
-    authStateChanges = auth.authStateChanges();
-    authStateChanges.listen((User? user) {
-      _users.value = user;
-      id = user!.uid;
-      print("User id ${id}");
-    });
   }
   void logIn(String email, String password) async{
     try{
@@ -212,7 +208,6 @@ class AuthController extends GetxController{
   }
 
   Future<String> checkPatientId(String cnic) async {
-    String patientId="null";
     try {
       QuerySnapshot query = await FirebaseFirestore.instance
           .collection('Users')
@@ -243,7 +238,34 @@ class AuthController extends GetxController{
     }
     return patientId;
   }
-  void ViewData(String cnic){
-    Text("Cnic ${cnic}");
+
+  void addLabTestDes (String type, String url, DateTime dateTime) async{
+    var user = auth.currentUser;
+    try{
+      CollectionReference reportsRef = firebaseFirestore.collection('Users').doc(patientId).collection('Reports');
+      // Add a document to the "Reports" subcollection
+      await reportsRef.add({
+        'lab Scientist Id': user!.uid,
+        'Report Type': type,
+        'Report Reference': url,
+        'Date': dateTime,
+      });
+    }catch (error) {
+      Get.snackbar(
+        "Error",
+        "An error occurred while saving user data",
+        backgroundColor: Colors.redAccent,
+        snackPosition: SnackPosition.BOTTOM,
+        titleText: Text(
+          "Error",
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+        messageText: Text(
+          error.toString(),
+        ),
+      );
+    }
   }
 }

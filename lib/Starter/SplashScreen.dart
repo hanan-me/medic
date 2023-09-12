@@ -48,7 +48,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   height: h*0.035,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    border: Border.all(color: Colors.white24),
+                    // border: Border.all(color: Colors.white24),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Text(
