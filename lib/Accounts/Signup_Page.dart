@@ -173,6 +173,7 @@ class _SignupPageState extends State<SignupPage> {
                                   dob,
                                   style: TextStyle(
                                     fontSize: 15,
+                                    color: Colors.black54
                                   ),
                                 ),
                               )

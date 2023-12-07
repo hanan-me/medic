@@ -57,7 +57,7 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
                   ),
                 ),
                 SizedBox(height: h*0.035,),
-                RoundedBtnWidget( title: "Edit Profile",onPress: () { Get.to(Doctor_Profile()); },),
+                RoundedBtnWidget( title: "Edit Profile",onPress: () { Get.to(() => Doctor_Profile()); },),
                 SizedBox(height: h*0.05,),
                 ProfileManage(title:"My Profile",icon: Icons.person,onPress:(){
                   Get.to(Doctor_Home());
@@ -97,7 +97,7 @@ class RoundedBtnWidget extends StatelessWidget {
           width: w*0.45,
           height: h*0.06,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(18),
+              borderRadius: BorderRadius.circular(25),
               boxShadow: [
                 BoxShadow(
                   blurRadius: 10,

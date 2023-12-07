@@ -71,6 +71,7 @@ class _CheckPatientState extends State<CheckPatient> {
                       }
                     })
             ),
+            // from doc_dash
             RoundedBtnWidget( title: "Check",
                 onPress: () async{
                   if (_formKey.currentState!.validate()) {

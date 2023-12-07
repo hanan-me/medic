@@ -94,6 +94,12 @@ class AuthController extends GetxController{
         'field2': 'value2',
       });
 
+      CollectionReference testsRef = userRef.doc(user.uid).collection('Tests');
+      await testsRef.add({
+        'field1': 'value1',
+        'field2': 'value2',
+      });
+
       Get.offAll(() => LoginPage());
     } catch (error) {
       Get.snackbar(
@@ -165,7 +171,7 @@ class AuthController extends GetxController{
                       ),
                     ),
                     messageText: Text(
-                      "Somrthing went wrong!",
+                      "Something went wrong!",
                     )
                 );
               }
@@ -239,10 +245,10 @@ class AuthController extends GetxController{
     return patientId;
   }
 
-  void addLabTestDes (String type, String url, DateTime dateTime) async{
+  void addLabTestDes (String type, String url, DateTime dateTime,double progress) async{
     var user = auth.currentUser;
     try{
-      CollectionReference reportsRef = firebaseFirestore.collection('Users').doc(patientId).collection('Reports');
+      CollectionReference reportsRef = firebaseFirestore.collection('Users').doc(patientId).collection('Tests');
       // Add a document to the "Reports" subcollection
       await reportsRef.add({
         'lab Scientist Id': user!.uid,

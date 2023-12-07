@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -54,7 +55,7 @@ class _Lab_ScientistState extends State<Lab_Scientist> {
       upload = false;
     });
 
-    AuthController.instance.addLabTestDes(type.text, urlDownload,dateTime);
+    AuthController.instance.addLabTestDes(type.text, urlDownload,dateTime,progress);
   }
   @override
   Widget build(BuildContext context) {
@@ -156,7 +157,23 @@ class _Lab_ScientistState extends State<Lab_Scientist> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: h*0.05,),
-
+                  // AnimatedButton(
+                  //     text: "Warning Dialog",
+                  //     color: Colors.orange,
+                  //     pressEvent:(){
+                  //       AwesomeDialog(
+                  //           context: context,
+                  //           animType: AnimType.topSlide,
+                  //           dialogType: DialogType.success,
+                  //           showCloseIcon: true,
+                  //           title: "Tests",
+                  //           desc: "Uploaded Successfully",
+                  //           // btnCancelOnPress: (){},
+                  //           btnOkOnPress: (){},
+                  //         // btnOkIcon: Icons.cancel,
+                  //       ).show();
+                  //     }
+                  // ),
                   Center(
                     child: Container(
                       width: w*0.45,
@@ -216,12 +233,11 @@ class _Lab_ScientistState extends State<Lab_Scientist> {
                         )
                       ],
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
             Padding(padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom)),
-
           ],
         ),
       ),

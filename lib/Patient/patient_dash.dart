@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:medic/Patient/chats.dart';
 
 import '../Auths/auth_controller.dart';
 class Patient_Dashboard extends StatefulWidget {
@@ -95,7 +96,7 @@ class _Patient_DashboardState extends State<Patient_Dashboard> {
               ProfileManage(title:"My Profile",icon: Icons.person,onPress:(){
                 // Get.to(Doctor_Page());
               }),
-              ProfileManage(title:"Messages",icon: Icons.message,onPress:(){}),
+              ProfileManage(title:"Messages",icon: Icons.message,onPress:(){Get.to(() => Chats_P());}),
               ProfileManage(title:"View Appointments",icon: Icons.calendar_month,onPress:(){}),
               Divider(
                 color: Colors.grey,
